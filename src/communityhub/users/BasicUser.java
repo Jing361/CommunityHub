@@ -1,16 +1,18 @@
 package communityhub.users;
 
-import communityhub.ROLE;
+import communityhub.gui.BasicGui;
 
 public class BasicUser {
   String username;
   private char[] password;
-  ROLE role;
 //  DB connection;
 
-  public BasicUser(String username, char[] password, ROLE role){
+  public BasicUser(String username, char[] password){
     this.username = username;
     this.password = password;
-    this.role = role;
+  }
+  
+  public void SpawnGui(){
+    new BasicGui(this);
   }
 }
