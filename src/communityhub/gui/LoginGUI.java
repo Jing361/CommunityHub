@@ -1,5 +1,6 @@
 package communityhub.gui;
 
+import communityhub.DB.Database;
 import communityhub.users.BasicUser;
 
 public class LoginGUI extends javax.swing.JDialog{
@@ -127,7 +128,7 @@ public class LoginGUI extends javax.swing.JDialog{
 
     username = usernameField.getText(); //get username from text box
     password = passwordField.getPassword(); //get password from password box
-    result = MongoDB.lookUp(username, password);
+    result = Database.lookUp(username, password);
 
     if(result != null){
       this.dispose();
