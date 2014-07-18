@@ -7,16 +7,16 @@ public class Announcement{
   public String author;
   public String title;
   public String body;
-  public String announceId;
+  public UUID announceId;
 
-  Announcement(String author, String title, String body){
+  public Announcement(String author, String title, String body){
     this.author = author;
     this.title = title;
     this.body = body;
-    this.announceId = UUID.randomUUID().toString();
+    this.announceId = UUID.randomUUID();
   }
 
-  Announcement(String author, String title, String body, String announceId){
+  public Announcement(String author, String title, String body, UUID announceId){
     this.author = author;
     this.title = title;
     this.body = body;

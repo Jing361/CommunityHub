@@ -20,7 +20,7 @@ public class Database{
     return null;
   }
   
-  public static boolean editAnnouncement(String oldID, Announcement newAnn){
+  public static boolean editAnnouncement(UUID oldID, Announcement newAnn){
     return false;
   }
 
