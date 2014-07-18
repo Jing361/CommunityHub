@@ -4,7 +4,7 @@ import communityhub.users.BasicUser;
 
 public class BasicGui extends javax.swing.JFrame {
 
-  BasicUser LoggedInUser = null;
+  public BasicUser LoggedInUser = null;
   
   public BasicGui(BasicUser user){
     this.initComponents();

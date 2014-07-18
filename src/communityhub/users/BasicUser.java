@@ -3,7 +3,7 @@ package communityhub.users;
 import communityhub.gui.BasicGui;
 
 public class BasicUser {
-  String username;
+  public String username;
   private char[] password;
 //  DB connection;
 

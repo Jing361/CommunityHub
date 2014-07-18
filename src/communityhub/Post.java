@@ -4,15 +4,15 @@ import java.util.ArrayList;
 import java.util.UUID;
 
 public class Post{
-  String author = "";
-  String title = "";
-  String body = "";
-  UUID postId;// = UUID.randomUUID().toString();
+  public String author = "";
+  public String title = "";
+  public String body = "";
+  public UUID postId;// = UUID.randomUUID().toString();
   //post responding to
   //should be type post?
-  UUID responseId = null;
+  public UUID responseId = null;
   //Should be list of posts?
-  ArrayList<String> responses = null;
+  public ArrayList<String> responses = null;
 
   public Post(){
   }
