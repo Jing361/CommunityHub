@@ -1,6 +1,9 @@
 package communityhub.users;
 
 import communityhub.gui.BasicGui;
+import communityhub.DB.Database;
+import communityhub.Post;
+import java.util.UUID;
 
 public class BasicUser {
   public String username;
@@ -14,5 +17,13 @@ public class BasicUser {
   
   public void SpawnGui(){
     new BasicGui(this);
+  }
+  
+  public UUID newPost(String title, String body){
+    return Database.CreatePost(new Post(this.username, title, body));
+  }
+  
+  public boolean editPost(Post oldP, Post newP){
+    return Database.editPost(oldP.responseId, newP);
   }
 }

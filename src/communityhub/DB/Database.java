@@ -8,6 +8,7 @@ import communityhub.Announcement;
 import communityhub.Post;
 import communityhub.users.BasicUser;
 import java.util.ArrayList;
+import java.util.UUID;
 
 //Some parameters will be changed based on database implementation.
 public class Database{
@@ -15,7 +16,7 @@ public class Database{
     return null;
   }
   // given an announcement object, it creates it in the db
-  public static String createAnnouncement(Announcement ann){
+  public static UUID createAnnouncement(Announcement ann){
     return null;
   }
   
@@ -35,11 +36,11 @@ public class Database{
     return false;
   }
   
-  public static String CreatePost(Post p){
+  public static UUID CreatePost(Post p){
     return null;
   }
   
-  public static boolean editPost(String oldID, Post p){
+  public static boolean editPost(UUID oldID, Post p){
     return false;
   }
   

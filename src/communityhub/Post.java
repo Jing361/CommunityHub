@@ -17,7 +17,7 @@ public class Post{
   public Post(){
   }
 
-  public Post(String author, String title, String body, UUID postId, UUID responseId, ArrayList<String> responseList, int roleIndex){
+  public Post(String author, String title, String body, UUID postId, UUID responseId, ArrayList<String> responseList){
     this.author = author;
     this.title = title;
     this.body = body;
@@ -30,6 +30,16 @@ public class Post{
     this.responseId = responseId;
   }
 
+  public Post(String author, String title, String body){
+    this.author = author;
+    this.title = title;
+    this.body = body;
+    this.responses = null;
+    this.postId = UUID.randomUUID();
+    this.responseId = responseId;
+  }
+
+  
 /*
   public BasicDBObject toBasicDBObject(){
     BasicDBObject mappedObj = new BasicDBObject();
