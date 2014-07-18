@@ -26,10 +26,11 @@ public class LoginGUI extends javax.swing.JDialog{
     passwordLabel = new javax.swing.JLabel();
     exitButton = new javax.swing.JButton();
     titleLabel = new javax.swing.JLabel();
+    failureLabel = new javax.swing.JLabel();
 
     setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-    passwordField.setText("student");
+    passwordField.setText("PASSWORD!");
 
     usernameLabel.setText("Username");
 
@@ -47,7 +48,7 @@ public class LoginGUI extends javax.swing.JDialog{
       }
     });
 
-    usernameField.setText("Insert your username here!");
+    usernameField.setText("Enter your username here!");
     usernameField.addActionListener(new java.awt.event.ActionListener() {
       public void actionPerformed(java.awt.event.ActionEvent evt) {
         usernameFieldActionPerformed(evt);
@@ -69,10 +70,6 @@ public class LoginGUI extends javax.swing.JDialog{
     getContentPane().setLayout(layout);
     layout.setHorizontalGroup(
       layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-      .addGroup(layout.createSequentialGroup()
-        .addGap(145, 145, 145)
-        .addComponent(titleLabel)
-        .addContainerGap())
       .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
         .addGap(60, 60, 60)
         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -91,13 +88,23 @@ public class LoginGUI extends javax.swing.JDialog{
               .addComponent(passwordField, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
               .addComponent(usernameField, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE))
             .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+      .addGroup(layout.createSequentialGroup()
+        .addGap(145, 145, 145)
+        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+          .addGroup(layout.createSequentialGroup()
+            .addGap(10, 10, 10)
+            .addComponent(failureLabel))
+          .addComponent(titleLabel))
+        .addContainerGap())
     );
     layout.setVerticalGroup(
       layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
       .addGroup(layout.createSequentialGroup()
-        .addContainerGap(24, Short.MAX_VALUE)
+        .addContainerGap(33, Short.MAX_VALUE)
         .addComponent(titleLabel)
-        .addGap(40, 40, 40)
+        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+        .addComponent(failureLabel)
+        .addGap(20, 20, 20)
         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
           .addComponent(usernameLabel)
           .addComponent(usernameField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -119,6 +126,7 @@ public class LoginGUI extends javax.swing.JDialog{
   private void resetButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_resetButtonActionPerformed
     usernameField.setText("");//Text Field for Username
     passwordField.setText("");//Text Field for Password
+    failureLabel.setText("Fields reset!");
   }//GEN-LAST:event_resetButtonActionPerformed
 
   private void submitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_submitButtonActionPerformed
@@ -134,7 +142,7 @@ public class LoginGUI extends javax.swing.JDialog{
       this.dispose();
       result.SpawnGui();
     } else {
-      System.out.println("No user found");
+      failureLabel.setText("No user found!");
     }
   }//GEN-LAST:event_submitButtonActionPerformed
 
@@ -188,6 +196,7 @@ public class LoginGUI extends javax.swing.JDialog{
   }
   // Variables declaration - do not modify//GEN-BEGIN:variables
   private javax.swing.JButton exitButton;
+  private javax.swing.JLabel failureLabel;
   private javax.swing.JPasswordField passwordField;
   private javax.swing.JLabel passwordLabel;
   private javax.swing.JButton resetButton;
