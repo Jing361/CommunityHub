@@ -38,7 +38,6 @@ public class Post{
     this.postId = UUID.randomUUID();
     this.responseId = responseId;
   }
-
   
 /*
   public BasicDBObject toBasicDBObject(){
@@ -55,9 +54,8 @@ public class Post{
     return mappedObj;
   }
 */
-/*
-  public static Post toPost(DBObject obj){
-    return new Post(obj.get("author").toString(), obj.get("title").toString(), obj.get("body").toString(), obj.get("postId").toString(), obj.get("responseId").toString(), (ArrayList<String>) obj.get("responses"), (int) obj.get("roleIndex"));
+  public static Post toPost(){
+    //return new Post(obj.get("author").toString(), obj.get("title").toString(), obj.get("body").toString(), obj.get("postId").toString(), obj.get("responseId").toString(), (ArrayList<String>) obj.get("responses"), (int) obj.get("roleIndex"));
+    return null;
   }
-*/
 }

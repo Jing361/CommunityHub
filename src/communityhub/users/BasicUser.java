@@ -1,6 +1,6 @@
 package communityhub.users;
 
-import communityhub.gui.BasicGui;
+import communityhub.gui.BasicGUI;
 import communityhub.DB.Database;
 import communityhub.Post;
 import java.util.UUID;
@@ -15,8 +15,8 @@ public class BasicUser {
     this.password = password;
   }
   
-  public void SpawnGui(){
-    new BasicGui(this);
+  public BasicGUI SpawnGui(){
+    return new BasicGUI(this);
   }
   
   public UUID newPost(String title, String body){
@@ -25,5 +25,9 @@ public class BasicUser {
   
   public boolean editPost(Post oldP, Post newP){
     return Database.editPost(oldP.responseId, newP);
+  }
+  
+  public String toString(){
+    return "BasicUser";
   }
 }

@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package communityhub.DB;
 
 import communityhub.Announcement;
@@ -45,7 +41,7 @@ public class Database{
     return false;
   }
 
-  public static ArrayList<Post> getRecentPosts(){
+  public static ArrayList<Post> getRecentPosts(BasicUser jim){
     return null;
   }
 
@@ -53,7 +49,7 @@ public class Database{
     return null;
   }
 
-  public static boolean deletePost(String postID){
+  public static boolean deletePost(UUID postID){
     return false;
   }
 
