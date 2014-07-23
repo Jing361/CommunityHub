@@ -25,9 +25,7 @@ public class ViewThreadGUI extends javax.swing.JFrame{
 
     for(int i = 0; i < parent.responses.size(); i++){
       //creates tabs for each reply to the parent, populating the tab with the reply contents
-      String postID = parent.responses.get(i);
-      this.user.connection.getPost(postID);
-      Post replyPost = Post.toPost();
+      Post replyPost = parent.responses.get(i);
       JComponent temp = makeTextPanel(replyPost.body);
 
       replyTabbedPane.addTab(replyPost.author + ": " + replyPost.title, null, temp, "Show Reply #" + (i + 1));

@@ -15,7 +15,7 @@ public class HighPermUser extends BasicUser{
   }
 
   public boolean editAnnouncement(Announcement oldAnn, Announcement newAnn){
-    return this.connection.editAnnouncement(oldAnn.announceId, newAnn);
+    return this.connection.editAnnouncement(oldAnn.postId, newAnn);
   }
 
   @Override

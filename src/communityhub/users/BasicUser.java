@@ -25,7 +25,7 @@ public class BasicUser {
   }
   
   public boolean editPost(Post oldP, Post newP){
-    return this.connection.editPost(oldP.responseId, newP);
+    return this.connection.editPost(oldP.postId, newP);
   }
   
   public String toString(){
