@@ -35,6 +35,11 @@ public class LoginGUI extends javax.swing.JDialog{
     failureLabel = new javax.swing.JLabel();
 
     setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+    addWindowListener(new java.awt.event.WindowAdapter() {
+      public void windowClosed(java.awt.event.WindowEvent evt) {
+        formWindowClosed(evt);
+      }
+    });
 
     passwordField.setText("admin");
     passwordField.addActionListener(new java.awt.event.ActionListener() {
@@ -158,6 +163,7 @@ public class LoginGUI extends javax.swing.JDialog{
   }//GEN-LAST:event_submitButtonActionPerformed
 
   private void usernameFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_usernameFieldActionPerformed
+    this.passwordField.grabFocus();
   }//GEN-LAST:event_usernameFieldActionPerformed
 
   private void exitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitButtonActionPerformed
@@ -172,6 +178,10 @@ public class LoginGUI extends javax.swing.JDialog{
   private void passwordFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_passwordFieldActionPerformed
     this.submitButtonActionPerformed(evt);
   }//GEN-LAST:event_passwordFieldActionPerformed
+
+  private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
+    this.exitButtonActionPerformed(null);
+  }//GEN-LAST:event_formWindowClosed
 
   /**
    * @param args the command line arguments
