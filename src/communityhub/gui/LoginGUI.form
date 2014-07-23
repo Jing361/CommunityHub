@@ -92,6 +92,9 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="PASSWORD!"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="passwordFieldActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="usernameLabel">
       <Properties>

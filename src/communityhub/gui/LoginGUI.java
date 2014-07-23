@@ -37,6 +37,11 @@ public class LoginGUI extends javax.swing.JDialog{
     setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
     passwordField.setText("PASSWORD!");
+    passwordField.addActionListener(new java.awt.event.ActionListener() {
+      public void actionPerformed(java.awt.event.ActionEvent evt) {
+        passwordFieldActionPerformed(evt);
+      }
+    });
 
     usernameLabel.setText("Username");
 
@@ -158,6 +163,10 @@ public class LoginGUI extends javax.swing.JDialog{
   private void exitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitButtonActionPerformed
     System.exit(0);
   }//GEN-LAST:event_exitButtonActionPerformed
+
+  private void passwordFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_passwordFieldActionPerformed
+    this.submitButtonActionPerformed(evt);
+  }//GEN-LAST:event_passwordFieldActionPerformed
 
   /**
    * @param args the command line arguments
