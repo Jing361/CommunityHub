@@ -104,7 +104,8 @@ public class AddAnouncementGUI extends javax.swing.JFrame{
     {//GEN-HEADEREND:event_submitActionPerformed
       String title = titleText.getText();
       String body = bodyText.getText();
-      Database.createAnnouncement(new Announcement(user.username, title, body));
+      
+      user.connection.createAnnouncement(new Announcement(user.username, title, body));
 
       user.SpawnGui();
       this.dispose();

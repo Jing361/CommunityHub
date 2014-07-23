@@ -4,7 +4,10 @@ import communityhub.Announcement;
 import communityhub.DB.Database;
 import communityhub.users.BasicUser;
 import communityhub.users.HighPermUser;
+import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.table.AbstractTableModel;
 
 public class HighPermUserGUI extends BasicGUI{
@@ -170,12 +173,16 @@ public class HighPermUserGUI extends BasicGUI{
     }// </editor-fold>//GEN-END:initComponents
   //This button adds a student user
     private void promoteUserButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_promoteUserButtonActionPerformed
-      ArrayList<BasicUser> users = Database.getPotentialUsers();
-      new ViewUsersGUI(users);
+      ArrayList<BasicUser> users = this.LoggedInUser.connection.getPotentialUsers();
+      new ViewUsersGUI(users, this.LoggedInUser.connection);
     }//GEN-LAST:event_promoteUserButtonActionPerformed
   //This button exits the GUI and opens a new login window
     private void graduateCoordinatorExitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_graduateCoordinatorExitButtonActionPerformed
-      new LoginGUI(new javax.swing.JFrame(), true);
+      try {
+        new LoginGUI(new javax.swing.JFrame(), true);
+      } catch(Exception ex) {
+        Logger.getLogger(HighPermUserGUI.class.getName()).log(Level.SEVERE, null, ex);
+      }
       this.dispose();
     }//GEN-LAST:event_graduateCoordinatorExitButtonActionPerformed
   //This button adds a new announcement to the announcement table
@@ -185,13 +192,12 @@ public class HighPermUserGUI extends BasicGUI{
     }//GEN-LAST:event_postAnnouncementsButtonActionPerformed
   //This views the schedule when clicked
     private void viewScheduleButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewScheduleButtonActionPerformed
-
     }//GEN-LAST:event_viewScheduleButtonActionPerformed
   //This creates the announcement table by looping through the database and adding new announcements
   //to the announcement table retrieve from MongoDB
 
   public void updateAnnouncementTable(){
-    announcementData = Database.getRecentAnnouncements();
+    announcementData = this.LoggedInUser.connection.getRecentAnnouncements();
 
     for(int i = 0; i < announcementData.size(); i++){
       announcementTable.setValueAt(announcementData.get(i).author, i, 0);
@@ -199,7 +205,6 @@ public class HighPermUserGUI extends BasicGUI{
       announcementTable.setValueAt(announcementData.get(i).body, i, 2);
     }
   }
-
   // Variables declaration - do not modify//GEN-BEGIN:variables
   private javax.swing.JTable announcementTable;
   private javax.swing.JButton graduateCoordinatorExitButton;

@@ -7,7 +7,10 @@ import communityhub.users.BasicUser;
 import communityhub.gui.AddPostGUI;
 import communityhub.users.LowPermUser;
 import java.io.File;
+import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JFileChooser;
 import javax.swing.table.AbstractTableModel;
 
@@ -16,7 +19,7 @@ public class LowPermUserGUI extends BasicGUI{
 
   public LowPermUserGUI(LowPermUser user){
     super(user);
-    announcementData = Database.getRecentAnnouncements();
+    announcementData = this.LoggedInUser.connection.getRecentAnnouncements();
     this.LoggedInUser = user;
 
     initComponents();
@@ -221,12 +224,11 @@ public class LowPermUserGUI extends BasicGUI{
   //This button press opens a directory viewer for students to upload forms
   //where only PDF files are viewable, and saves the file directory to the database
     private void uploadFormsButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_uploadFormsButtonActionPerformed
-
     }//GEN-LAST:event_uploadFormsButtonActionPerformed
   //This button press action opens the forum and 
   //displays the database list of posts in a table view
     private void viewForumButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewForumButtonActionPerformed
-      ArrayList<Post> forumPosts = Database.getRecentPosts(this.LoggedInUser);
+      ArrayList<Post> forumPosts = this.LoggedInUser.connection.getRecentPosts(this.LoggedInUser);
 
       ForumGUI table = new ForumGUI(forumPosts, this.LoggedInUser);
 
@@ -234,14 +236,16 @@ public class LowPermUserGUI extends BasicGUI{
     }//GEN-LAST:event_viewForumButtonActionPerformed
   //This button press opens a new login screen and closes the student GUI
     private void exitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitButtonActionPerformed
-      new LoginGUI(new javax.swing.JFrame(), true);
+      try {
+        new LoginGUI(new javax.swing.JFrame(), true);
+      } catch(Exception ex) {
+        Logger.getLogger(LowPermUserGUI.class.getName()).log(Level.SEVERE, null, ex);
+      }
       this.dispose();
     }//GEN-LAST:event_exitButtonActionPerformed
   //This button press opens a new window to view documents that have been uploaded
     private void viewUploadedDocumentsButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewUploadedDocumentsButtonActionPerformed
-
     }//GEN-LAST:event_viewUploadedDocumentsButtonActionPerformed
-
   // Variables declaration - do not modify//GEN-BEGIN:variables
   private javax.swing.JTable announcementTable;
   private javax.swing.JLabel announcementsLabel;

@@ -120,8 +120,8 @@ public class AddPostGUI extends javax.swing.JFrame{
       }
       // else leave it as null
 
-      Database.CreatePost(new Post(user.username, title, body, null, this.replyTo.postId, p));
-      new ForumGUI(Database.getRecentPosts(user), user);
+      this.user.connection.CreatePost(new Post(user.username, title, body, null, this.replyTo.postId, p));
+      new ForumGUI(this.user.connection.getRecentPosts(user), user);
       this.dispose();
     }//GEN-LAST:event_submitActionPerformed
 

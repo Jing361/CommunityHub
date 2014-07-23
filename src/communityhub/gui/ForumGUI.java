@@ -209,7 +209,7 @@ public class ForumGUI extends javax.swing.JFrame{
 
   // refreshes forum post info
   private void updatePostData(){
-    Database.getRecentPosts(user).toArray(data);
+    this.user.connection.getRecentPosts(user).toArray(data);
   }
 
     private void ViewThreadButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ViewThreadButtonActionPerformed
@@ -225,7 +225,7 @@ public class ForumGUI extends javax.swing.JFrame{
       if(forumTable.getSelectedRow() >= 0){
         Post temp = data[forumTable.getSelectedRow()];
         if(user.username.equals(temp.author)){
-          Database.deletePost(temp.postId);
+          this.user.connection.deletePost(temp.postId);
         } else {
           System.out.println("This was not your post");
         }

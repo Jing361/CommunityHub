@@ -109,8 +109,8 @@ public class EditPostGUI extends javax.swing.JFrame{
       String title = titleText.getText();
       String body = bodyText.getText();
 
-      Database.editPost(this.replyTo.postId, new Post(user.username, title, body));
-      new ForumGUI(Database.getRecentPosts(user), user);
+      this.user.connection.editPost(this.replyTo.postId, new Post(user.username, title, body));
+      new ForumGUI(this.user.connection.getRecentPosts(user), user);
       this.dispose();
     }//GEN-LAST:event_submitActionPerformed
 

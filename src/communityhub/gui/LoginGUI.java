@@ -2,10 +2,16 @@ package communityhub.gui;
 
 import communityhub.DB.Database;
 import communityhub.users.BasicUser;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class LoginGUI extends javax.swing.JDialog{
-  public LoginGUI(java.awt.Frame parent, boolean modal){
+  Database db = null;
+
+  public LoginGUI(java.awt.Frame parent, boolean modal) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException{
     super(parent, modal);
+    this.db = new Database();
     initComponents();
   }
 
@@ -136,7 +142,7 @@ public class LoginGUI extends javax.swing.JDialog{
 
     username = usernameField.getText(); //get username from text box
     password = passwordField.getPassword(); //get password from password box
-    result = Database.lookUp(username, password);
+    result = this.db.lookUp(username, password);
 
     if(result != null){
       this.dispose();
@@ -183,14 +189,21 @@ public class LoginGUI extends javax.swing.JDialog{
     /* Create and display the dialog */
     java.awt.EventQueue.invokeLater(new Runnable(){
       public void run(){
-        LoginGUI dialog = new LoginGUI(new javax.swing.JFrame(), true);
-        dialog.addWindowListener(new java.awt.event.WindowAdapter(){
-          @Override
-          public void windowClosing(java.awt.event.WindowEvent e){
-            System.exit(0);
-          }
-        });
-        dialog.setVisible(true);
+        LoginGUI dialog = null;
+        try {
+          dialog = new LoginGUI(new javax.swing.JFrame(), true);
+        } catch(Exception ex) {
+          Logger.getLogger(LoginGUI.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        if(dialog != null){
+          dialog.addWindowListener(new java.awt.event.WindowAdapter(){
+            @Override
+            public void windowClosing(java.awt.event.WindowEvent e){
+              System.exit(0);
+            }
+          });
+          dialog.setVisible(true);
+        }
       }
     });
   }

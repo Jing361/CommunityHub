@@ -8,11 +8,12 @@ import java.util.UUID;
 public class BasicUser {
   public String username;
   private char[] password;
-//  DB connection;
+  public Database connection = null;
 
-  public BasicUser(String username, char[] password){
+  public BasicUser(String username, char[] password, Database conn){
     this.username = username;
     this.password = password;
+    this.connection = conn;
   }
   
   public BasicGUI SpawnGui(){
@@ -20,11 +21,11 @@ public class BasicUser {
   }
   
   public UUID newPost(String title, String body){
-    return Database.CreatePost(new Post(this.username, title, body));
+    return this.connection.CreatePost(new Post(this.username, title, body));
   }
   
   public boolean editPost(Post oldP, Post newP){
-    return Database.editPost(oldP.responseId, newP);
+    return this.connection.editPost(oldP.responseId, newP);
   }
   
   public String toString(){

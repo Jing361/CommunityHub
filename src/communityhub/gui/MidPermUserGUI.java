@@ -5,7 +5,10 @@ import communityhub.DB.Database;
 import communityhub.Post;
 import communityhub.users.*;
 import java.io.File;
+import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JFileChooser;
 import javax.swing.table.AbstractTableModel;
 
@@ -15,8 +18,8 @@ public class MidPermUserGUI extends BasicGUI{
   public MidPermUserGUI(MidPermUser user){
     super(user);
     //gets announcement data and fills the table by using a for loop
-    announcementData = Database.getRecentAnnouncements();
     LoggedInUser = user;
+    announcementData = this.LoggedInUser.connection.getRecentAnnouncements();
 
     initComponents();
 
@@ -44,11 +47,11 @@ public class MidPermUserGUI extends BasicGUI{
   private void initComponents() {
 
     graduateAssistantLoginTitle = new javax.swing.JLabel();
-    graduateAssistantPostAnnouncementButton = new javax.swing.JButton();
-    graduateAssistantViewStudentQueriesButton = new javax.swing.JButton();
-    graduateAssistantViewDocumentsButton = new javax.swing.JButton();
-    graduateAssistantSubmitScheduleButton = new javax.swing.JButton();
-    graduateAssistantExitButton = new javax.swing.JButton();
+    postAnnouncementButton = new javax.swing.JButton();
+    viewStudentQueriesButton = new javax.swing.JButton();
+    viewDocumentsButton = new javax.swing.JButton();
+    submitScheduleButton = new javax.swing.JButton();
+    exitButton = new javax.swing.JButton();
     jScrollPane1 = new javax.swing.JScrollPane();
     announcementTable = new javax.swing.JTable();
 
@@ -57,38 +60,38 @@ public class MidPermUserGUI extends BasicGUI{
     graduateAssistantLoginTitle.setFont(new java.awt.Font("Lucida Grande", 0, 18)); // NOI18N
     graduateAssistantLoginTitle.setText("Graduate Assistant Page");
 
-    graduateAssistantPostAnnouncementButton.setText("Post Announcement");
-    graduateAssistantPostAnnouncementButton.addActionListener(new java.awt.event.ActionListener() {
+    postAnnouncementButton.setText("Post Announcement");
+    postAnnouncementButton.addActionListener(new java.awt.event.ActionListener() {
       public void actionPerformed(java.awt.event.ActionEvent evt) {
-        graduateAssistantPostAnnouncementButtonActionPerformed(evt);
+        postAnnouncementButtonActionPerformed(evt);
       }
     });
 
-    graduateAssistantViewStudentQueriesButton.setText("View Queries");
-    graduateAssistantViewStudentQueriesButton.addActionListener(new java.awt.event.ActionListener() {
+    viewStudentQueriesButton.setText("View Queries");
+    viewStudentQueriesButton.addActionListener(new java.awt.event.ActionListener() {
       public void actionPerformed(java.awt.event.ActionEvent evt) {
-        graduateAssistantViewStudentQueriesButtonActionPerformed(evt);
+        viewStudentQueriesButtonActionPerformed(evt);
       }
     });
 
-    graduateAssistantViewDocumentsButton.setText("View Uploaded Documents");
-    graduateAssistantViewDocumentsButton.addActionListener(new java.awt.event.ActionListener() {
+    viewDocumentsButton.setText("View Uploaded Documents");
+    viewDocumentsButton.addActionListener(new java.awt.event.ActionListener() {
       public void actionPerformed(java.awt.event.ActionEvent evt) {
-        graduateAssistantViewDocumentsButtonActionPerformed(evt);
+        viewDocumentsButtonActionPerformed(evt);
       }
     });
 
-    graduateAssistantSubmitScheduleButton.setText("Submit Availability Schedule");
-    graduateAssistantSubmitScheduleButton.addActionListener(new java.awt.event.ActionListener() {
+    submitScheduleButton.setText("Submit Availability Schedule");
+    submitScheduleButton.addActionListener(new java.awt.event.ActionListener() {
       public void actionPerformed(java.awt.event.ActionEvent evt) {
-        graduateAssistantSubmitScheduleButtonActionPerformed(evt);
+        submitScheduleButtonActionPerformed(evt);
       }
     });
 
-    graduateAssistantExitButton.setText("Exit");
-    graduateAssistantExitButton.addActionListener(new java.awt.event.ActionListener() {
+    exitButton.setText("Exit");
+    exitButton.addActionListener(new java.awt.event.ActionListener() {
       public void actionPerformed(java.awt.event.ActionEvent evt) {
-        graduateAssistantExitButtonActionPerformed(evt);
+        exitButtonActionPerformed(evt);
       }
     });
 
@@ -152,16 +155,16 @@ public class MidPermUserGUI extends BasicGUI{
             .add(layout.createSequentialGroup()
               .addContainerGap()
               .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING)
-                .add(graduateAssistantExitButton)
+                .add(exitButton)
                 .add(jScrollPane1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 574, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                 .add(layout.createSequentialGroup()
-                  .add(graduateAssistantPostAnnouncementButton)
+                  .add(postAnnouncementButton)
                   .add(18, 18, 18)
-                  .add(graduateAssistantViewStudentQueriesButton)
+                  .add(viewStudentQueriesButton)
                   .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
-                  .add(graduateAssistantSubmitScheduleButton)
+                  .add(submitScheduleButton)
                   .add(18, 18, 18)
-                  .add(graduateAssistantViewDocumentsButton))))
+                  .add(viewDocumentsButton))))
             .add(layout.createSequentialGroup()
               .add(202, 202, 202)
               .add(graduateAssistantLoginTitle)))
@@ -174,55 +177,56 @@ public class MidPermUserGUI extends BasicGUI{
           .add(graduateAssistantLoginTitle)
           .add(18, 18, 18)
           .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
-            .add(graduateAssistantPostAnnouncementButton)
-            .add(graduateAssistantViewStudentQueriesButton)
-            .add(graduateAssistantViewDocumentsButton)
-            .add(graduateAssistantSubmitScheduleButton))
+            .add(postAnnouncementButton)
+            .add(viewStudentQueriesButton)
+            .add(viewDocumentsButton)
+            .add(submitScheduleButton))
           .add(39, 39, 39)
           .add(jScrollPane1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 235, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
           .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, 35, Short.MAX_VALUE)
-          .add(graduateAssistantExitButton)
+          .add(exitButton)
           .add(29, 29, 29))
       );
 
       pack();
     }// </editor-fold>//GEN-END:initComponents
   //This button exits the GraduateAssistantGUI and opens a login form
-    private void graduateAssistantExitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_graduateAssistantExitButtonActionPerformed
-      LoginGUI dialog = new LoginGUI(new javax.swing.JFrame(), true);
+    private void exitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitButtonActionPerformed
+      try {
+        new LoginGUI(new javax.swing.JFrame(), true);
+      } catch(Exception ex) {
+        Logger.getLogger(MidPermUserGUI.class.getName()).log(Level.SEVERE, null, ex);
+      }
       this.dispose();
-    }//GEN-LAST:event_graduateAssistantExitButtonActionPerformed
+    }//GEN-LAST:event_exitButtonActionPerformed
   //This button opens a page to add a new announcement
-    private void graduateAssistantPostAnnouncementButtonActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_graduateAssistantPostAnnouncementButtonActionPerformed
-    {//GEN-HEADEREND:event_graduateAssistantPostAnnouncementButtonActionPerformed
+    private void postAnnouncementButtonActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_postAnnouncementButtonActionPerformed
+    {//GEN-HEADEREND:event_postAnnouncementButtonActionPerformed
       AddAnouncementGUI announce = new AddAnouncementGUI(LoggedInUser);
       this.dispose();
-    }//GEN-LAST:event_graduateAssistantPostAnnouncementButtonActionPerformed
+    }//GEN-LAST:event_postAnnouncementButtonActionPerformed
   //This button views the forum with student queries
-    private void graduateAssistantViewStudentQueriesButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_graduateAssistantViewStudentQueriesButtonActionPerformed
-      ArrayList<Post> forumPosts = Database.getRecentPosts(LoggedInUser);
+    private void viewStudentQueriesButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewStudentQueriesButtonActionPerformed
+      ArrayList<Post> forumPosts = this.LoggedInUser.connection.getRecentPosts(LoggedInUser);
 
       ForumGUI table = new ForumGUI(forumPosts, LoggedInUser);
 
       table.setVisible(true);
-    }//GEN-LAST:event_graduateAssistantViewStudentQueriesButtonActionPerformed
+    }//GEN-LAST:event_viewStudentQueriesButtonActionPerformed
   //This button opens a page to view uploaded documents
-    private void graduateAssistantViewDocumentsButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_graduateAssistantViewDocumentsButtonActionPerformed
-
-    }//GEN-LAST:event_graduateAssistantViewDocumentsButtonActionPerformed
+    private void viewDocumentsButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewDocumentsButtonActionPerformed
+    }//GEN-LAST:event_viewDocumentsButtonActionPerformed
   //This button opens a directory viewer to upload a pdf version of a schedule
-    private void graduateAssistantSubmitScheduleButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_graduateAssistantSubmitScheduleButtonActionPerformed
-
-    }//GEN-LAST:event_graduateAssistantSubmitScheduleButtonActionPerformed
-
+    private void submitScheduleButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_submitScheduleButtonActionPerformed
+    }//GEN-LAST:event_submitScheduleButtonActionPerformed
   // Variables declaration - do not modify//GEN-BEGIN:variables
   private javax.swing.JTable announcementTable;
-  private javax.swing.JButton graduateAssistantExitButton;
+  private javax.swing.JButton exitButton;
   private javax.swing.JLabel graduateAssistantLoginTitle;
-  private javax.swing.JButton graduateAssistantPostAnnouncementButton;
-  private javax.swing.JButton graduateAssistantSubmitScheduleButton;
-  private javax.swing.JButton graduateAssistantViewDocumentsButton;
-  private javax.swing.JButton graduateAssistantViewStudentQueriesButton;
   private javax.swing.JScrollPane jScrollPane1;
+  private javax.swing.JButton postAnnouncementButton;
+  private javax.swing.JButton submitScheduleButton;
+  private javax.swing.JButton viewDocumentsButton;
+  private javax.swing.JButton viewStudentQueriesButton;
   // End of variables declaration//GEN-END:variables
 }

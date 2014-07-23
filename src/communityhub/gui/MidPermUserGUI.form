@@ -27,16 +27,16 @@
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="1" attributes="0">
-                          <Component id="graduateAssistantExitButton" min="-2" max="-2" attributes="0"/>
+                          <Component id="exitButton" min="-2" max="-2" attributes="0"/>
                           <Component id="jScrollPane1" min="-2" pref="574" max="-2" attributes="0"/>
                           <Group type="102" attributes="0">
-                              <Component id="graduateAssistantPostAnnouncementButton" min="-2" max="-2" attributes="0"/>
+                              <Component id="postAnnouncementButton" min="-2" max="-2" attributes="0"/>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Component id="graduateAssistantViewStudentQueriesButton" min="-2" max="-2" attributes="0"/>
+                              <Component id="viewStudentQueriesButton" min="-2" max="-2" attributes="0"/>
                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                              <Component id="graduateAssistantSubmitScheduleButton" min="-2" max="-2" attributes="0"/>
+                              <Component id="submitScheduleButton" min="-2" max="-2" attributes="0"/>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Component id="graduateAssistantViewDocumentsButton" min="-2" max="-2" attributes="0"/>
+                              <Component id="viewDocumentsButton" min="-2" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                   </Group>
@@ -56,15 +56,15 @@
               <Component id="graduateAssistantLoginTitle" min="-2" max="-2" attributes="0"/>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="graduateAssistantPostAnnouncementButton" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="graduateAssistantViewStudentQueriesButton" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="graduateAssistantViewDocumentsButton" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="graduateAssistantSubmitScheduleButton" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="postAnnouncementButton" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="viewStudentQueriesButton" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="viewDocumentsButton" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="submitScheduleButton" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="39" max="-2" attributes="0"/>
               <Component id="jScrollPane1" min="-2" pref="235" max="-2" attributes="0"/>
               <EmptySpace pref="35" max="32767" attributes="0"/>
-              <Component id="graduateAssistantExitButton" min="-2" max="-2" attributes="0"/>
+              <Component id="exitButton" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="29" max="-2" attributes="0"/>
           </Group>
       </Group>
@@ -79,44 +79,44 @@
         <Property name="text" type="java.lang.String" value="Graduate Assistant Page"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JButton" name="graduateAssistantPostAnnouncementButton">
+    <Component class="javax.swing.JButton" name="postAnnouncementButton">
       <Properties>
         <Property name="text" type="java.lang.String" value="Post Announcement"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="graduateAssistantPostAnnouncementButtonActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="postAnnouncementButtonActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="graduateAssistantViewStudentQueriesButton">
+    <Component class="javax.swing.JButton" name="viewStudentQueriesButton">
       <Properties>
         <Property name="text" type="java.lang.String" value="View Queries"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="graduateAssistantViewStudentQueriesButtonActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="viewStudentQueriesButtonActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="graduateAssistantViewDocumentsButton">
+    <Component class="javax.swing.JButton" name="viewDocumentsButton">
       <Properties>
         <Property name="text" type="java.lang.String" value="View Uploaded Documents"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="graduateAssistantViewDocumentsButtonActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="viewDocumentsButtonActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="graduateAssistantSubmitScheduleButton">
+    <Component class="javax.swing.JButton" name="submitScheduleButton">
       <Properties>
         <Property name="text" type="java.lang.String" value="Submit Availability Schedule"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="graduateAssistantSubmitScheduleButtonActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="submitScheduleButtonActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="graduateAssistantExitButton">
+    <Component class="javax.swing.JButton" name="exitButton">
       <Properties>
         <Property name="text" type="java.lang.String" value="Exit"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="graduateAssistantExitButtonActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="exitButtonActionPerformed"/>
       </Events>
     </Component>
     <Container class="javax.swing.JScrollPane" name="jScrollPane1">

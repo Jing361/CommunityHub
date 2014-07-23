@@ -1,5 +1,4 @@
 package communityhub.gui;
-
 import communityhub.DB.Database;
 import communityhub.users.BasicUser;
 import java.util.ArrayList;
@@ -8,9 +7,11 @@ import javax.swing.table.AbstractTableModel;
 
 public class ViewUsersGUI extends javax.swing.JFrame{
   ArrayList<BasicUser> data;
+  Database db = null;
 
-  public ViewUsersGUI(ArrayList<BasicUser> userList){
-    data = userList;
+  public ViewUsersGUI(ArrayList<BasicUser> userList, Database db){
+    this.data = userList;
+    this.db = db;
     initComponents();
     //this views the users and their roles and displays them in a table
     docTable.getColumnModel().getColumn(0).setHeaderValue("User");
@@ -147,9 +148,9 @@ public class ViewUsersGUI extends javax.swing.JFrame{
     private void promoteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_promoteButtonActionPerformed
       if(docTable.getSelectedRow() >= 0){
         //Second param should not be null
-        Database.changeRole(data.get(docTable.getSelectedRow()).username, null);
+        this.db.changeRole(data.get(docTable.getSelectedRow()).username, null);
         this.setVisible(false);
-        new ViewUsersGUI(Database.getPotentialUsers());
+        new ViewUsersGUI(this.db.getPotentialUsers(), this.db);
         this.dispose();
       }
     }//GEN-LAST:event_promoteButtonActionPerformed
@@ -161,9 +162,9 @@ public class ViewUsersGUI extends javax.swing.JFrame{
     private void demoteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_demoteButtonActionPerformed
       if(docTable.getSelectedRow() >= 0){
         //Second param should not be null
-        Database.changeRole(data.get(docTable.getSelectedRow()).username, null);
+        this.db.changeRole(data.get(docTable.getSelectedRow()).username, null);
         this.setVisible(false);
-        new ViewUsersGUI(Database.getPotentialUsers());
+        new ViewUsersGUI(this.db.getPotentialUsers(), this.db);
         this.dispose();
       }
     }//GEN-LAST:event_demoteButtonActionPerformed
