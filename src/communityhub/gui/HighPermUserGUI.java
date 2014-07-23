@@ -197,14 +197,14 @@ public class HighPermUserGUI extends BasicGUI{
   //to the announcement table retrieve from MongoDB
 
   public void updateAnnouncementTable(){
-    announcementData = this.LoggedInUser.connection.getRecentAnnouncements();
-
-    if(this.announcementData != null){
-      for(int i = 0; i < announcementData.size(); i++){
-        announcementTable.setValueAt(announcementData.get(i).author, i, 0);
-        announcementTable.setValueAt(announcementData.get(i).title, i, 1);
-        announcementTable.setValueAt(announcementData.get(i).body, i, 2);
-      }
+    this.announcementData = this.LoggedInUser.connection.getRecentAnnouncements();
+    if(this.announcementData == null){
+      this.announcementData = new ArrayList<Announcement>();
+    }
+    for(int i = 0; i < announcementData.size(); i++){
+      announcementTable.setValueAt(announcementData.get(i).author, i, 0);
+      announcementTable.setValueAt(announcementData.get(i).title, i, 1);
+      announcementTable.setValueAt(announcementData.get(i).body, i, 2);
     }
   }
   // Variables declaration - do not modify//GEN-BEGIN:variables
