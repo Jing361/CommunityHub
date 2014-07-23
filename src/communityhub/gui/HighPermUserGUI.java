@@ -199,10 +199,12 @@ public class HighPermUserGUI extends BasicGUI{
   public void updateAnnouncementTable(){
     announcementData = this.LoggedInUser.connection.getRecentAnnouncements();
 
-    for(int i = 0; i < announcementData.size(); i++){
-      announcementTable.setValueAt(announcementData.get(i).author, i, 0);
-      announcementTable.setValueAt(announcementData.get(i).title, i, 1);
-      announcementTable.setValueAt(announcementData.get(i).body, i, 2);
+    if(this.announcementData != null){
+      for(int i = 0; i < announcementData.size(); i++){
+        announcementTable.setValueAt(announcementData.get(i).author, i, 0);
+        announcementTable.setValueAt(announcementData.get(i).title, i, 1);
+        announcementTable.setValueAt(announcementData.get(i).body, i, 2);
+      }
     }
   }
   // Variables declaration - do not modify//GEN-BEGIN:variables
