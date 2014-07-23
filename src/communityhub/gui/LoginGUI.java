@@ -36,7 +36,7 @@ public class LoginGUI extends javax.swing.JDialog{
 
     setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-    passwordField.setText("PASSWORD!");
+    passwordField.setText("admin");
     passwordField.addActionListener(new java.awt.event.ActionListener() {
       public void actionPerformed(java.awt.event.ActionEvent evt) {
         passwordFieldActionPerformed(evt);
@@ -59,7 +59,7 @@ public class LoginGUI extends javax.swing.JDialog{
       }
     });
 
-    usernameField.setText("Enter your username here!");
+    usernameField.setText("admin");
     usernameField.addActionListener(new java.awt.event.ActionListener() {
       public void actionPerformed(java.awt.event.ActionEvent evt) {
         usernameFieldActionPerformed(evt);
