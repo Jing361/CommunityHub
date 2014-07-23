@@ -1,14 +1,21 @@
 package communityhub.gui;
 
+import communityhub.Announcement;
 import communityhub.users.BasicUser;
+import java.util.ArrayList;
+import javax.swing.table.AbstractTableModel;
 
 public class BasicGUI extends javax.swing.JFrame {
-
   public BasicUser LoggedInUser = null;
+  ArrayList<Announcement> announcementData = null;
   
   public BasicGUI(BasicUser user){
-    this.initComponents();
     this.LoggedInUser = user;
+    this.updateAnnouncementTable();
+    this.initComponents();
+    announcementTable.getColumnModel().getColumn(0).setHeaderValue("Author");
+    announcementTable.getColumnModel().getColumn(1).setHeaderValue("Title");
+    announcementTable.getColumnModel().getColumn(2).setHeaderValue("Body");
   }
 
   /**
@@ -20,22 +27,99 @@ public class BasicGUI extends javax.swing.JFrame {
   // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
   private void initComponents() {
 
+    jScrollPane1 = new javax.swing.JScrollPane();
+    announcementTable = new javax.swing.JTable();
+
     setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-    javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-    getContentPane().setLayout(layout);
-    layout.setHorizontalGroup(
-      layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-      .addGap(0, 400, Short.MAX_VALUE)
-    );
-    layout.setVerticalGroup(
-      layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-      .addGap(0, 300, Short.MAX_VALUE)
-    );
+    announcementTable.setModel(new AbstractTableModel()
+      {
+        @Override
+        public int getRowCount()
+        {
+          return announcementData.size();
+        }
 
-    pack();
-  }// </editor-fold>//GEN-END:initComponents
+        @Override
+        public int getColumnCount()
+        {
+          return 3;
+        }
+
+        @Override
+        public String getValueAt(int i, int j)
+        {
+          String temp = null;
+          switch (j)
+          {
+            case 0:
+            temp = announcementData.get(i).author;
+            break;
+            case 1:
+            temp = announcementData.get(i).title;
+            break;
+            case 2:
+            temp = announcementData.get(i).body;
+            break;
+          }
+          return temp;
+        }
+
+        public void setValueAt(String val, int i, int j)
+        {
+          switch (j)
+          {
+            case 1:
+            announcementData.get(i).author = val;
+            break;
+            case 2:
+            announcementData.get(i).title = val;
+            break;
+            case 3:
+            announcementData.get(i).body = val;
+            break;
+          }
+        }
+      });
+      jScrollPane1.setViewportView(announcementTable);
+
+      javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+      getContentPane().setLayout(layout);
+      layout.setHorizontalGroup(
+        layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        .addGap(0, 594, Short.MAX_VALUE)
+        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+          .addGroup(layout.createSequentialGroup()
+            .addContainerGap()
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 574, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+      );
+      layout.setVerticalGroup(
+        layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        .addGap(0, 300, Short.MAX_VALUE)
+        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+          .addGroup(layout.createSequentialGroup()
+            .addGap(32, 32, 32)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 235, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addContainerGap(33, Short.MAX_VALUE)))
+      );
+
+      pack();
+    }// </editor-fold>//GEN-END:initComponents
+  public void updateAnnouncementTable(){
+    this.announcementData = this.LoggedInUser.connection.getRecentAnnouncements();
+    if(this.announcementData == null){
+      this.announcementData = new ArrayList<Announcement>();
+    }
+    for(int i = 0; i < announcementData.size(); i++){
+      this.announcementTable.setValueAt(announcementData.get(i).author, i, 0);
+      this.announcementTable.setValueAt(announcementData.get(i).title, i, 1);
+      this.announcementTable.setValueAt(announcementData.get(i).body, i, 2);
+    }
+  }
 
   // Variables declaration - do not modify//GEN-BEGIN:variables
+  protected javax.swing.JTable announcementTable;
+  private javax.swing.JScrollPane jScrollPane1;
   // End of variables declaration//GEN-END:variables
 }

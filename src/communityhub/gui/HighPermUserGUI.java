@@ -11,18 +11,9 @@ import java.util.logging.Logger;
 import javax.swing.table.AbstractTableModel;
 
 public class HighPermUserGUI extends BasicGUI{
-  ArrayList<Announcement> announcementData = new ArrayList();
-
   public HighPermUserGUI(HighPermUser user){
     super(user);
-    //announcementData = MongoDB.getRecentAnnouncements();
     this.initComponents();
-    this.updateAnnouncementTable();
-    LoggedInUser = user;
-
-    announcementTable.getColumnModel().getColumn(0).setHeaderValue("Author");
-    announcementTable.getColumnModel().getColumn(1).setHeaderValue("Title");
-    announcementTable.getColumnModel().getColumn(2).setHeaderValue("Body");
 
     setVisible(true);
   }
@@ -40,9 +31,7 @@ public class HighPermUserGUI extends BasicGUI{
     promoteUserButton = new javax.swing.JButton();
     postAnnouncementsButton = new javax.swing.JButton();
     viewScheduleButton = new javax.swing.JButton();
-    graduateCoordinatorExitButton = new javax.swing.JButton();
-    jScrollPane1 = new javax.swing.JScrollPane();
-    announcementTable = new javax.swing.JTable();
+    exitButton = new javax.swing.JButton();
 
     setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -70,121 +59,66 @@ public class HighPermUserGUI extends BasicGUI{
       }
     });
 
-    graduateCoordinatorExitButton.setText("Exit");
-    graduateCoordinatorExitButton.addActionListener(new java.awt.event.ActionListener() {
+    exitButton.setText("Exit");
+    exitButton.addActionListener(new java.awt.event.ActionListener() {
       public void actionPerformed(java.awt.event.ActionEvent evt) {
-        graduateCoordinatorExitButtonActionPerformed(evt);
+        exitButtonActionPerformed(evt);
       }
     });
 
-    announcementTable.setModel(new AbstractTableModel()
-      {
-        @Override
-        public int getRowCount()
-        {
-          return announcementData.size();
-        }
-
-        @Override
-        public int getColumnCount()
-        {
-          return 3;
-        }
-
-        @Override
-        public String getValueAt(int i, int j)
-        {
-          String temp = null;
-          switch (j)
-          {
-            case 0:
-            temp = announcementData.get(i).author;
-            break;
-            case 1:
-            temp = announcementData.get(i).title;
-            break;
-            case 2:
-            temp = announcementData.get(i).body;
-            break;
-          }
-          return temp;
-        }
-
-        public void setValueAt(String val, int i, int j)
-        {
-          switch (j)
-          {
-            case 1:
-            announcementData.get(i).author = val;
-            break;
-            case 2:
-            announcementData.get(i).title = val;
-            break;
-            case 3:
-            announcementData.get(i).body = val;
-            break;
-          }
-        }
-      });
-      jScrollPane1.setViewportView(announcementTable);
-
-      org.jdesktop.layout.GroupLayout layout = new org.jdesktop.layout.GroupLayout(getContentPane());
-      getContentPane().setLayout(layout);
-      layout.setHorizontalGroup(
-        layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-        .add(layout.createSequentialGroup()
+    org.jdesktop.layout.GroupLayout layout = new org.jdesktop.layout.GroupLayout(getContentPane());
+    getContentPane().setLayout(layout);
+    layout.setHorizontalGroup(
+      layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+      .add(layout.createSequentialGroup()
+        .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
           .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
             .add(layout.createSequentialGroup()
-              .addContainerGap()
-              .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                .add(layout.createSequentialGroup()
-                  .add(51, 51, 51)
-                  .add(postAnnouncementsButton)
-                  .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
-                  .add(promoteUserButton)
-                  .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                  .add(viewScheduleButton))
-                .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING)
-                  .add(graduateCoordinatorExitButton)
-                  .add(jScrollPane1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 574, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))))
+              .add(61, 61, 61)
+              .add(postAnnouncementsButton)
+              .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
+              .add(promoteUserButton)
+              .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+              .add(viewScheduleButton))
             .add(layout.createSequentialGroup()
-              .add(222, 222, 222)
-              .add(graduateCoordinatorTitle)))
-          .addContainerGap(19, Short.MAX_VALUE))
-      );
-      layout.setVerticalGroup(
-        layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-        .add(layout.createSequentialGroup()
-          .add(22, 22, 22)
-          .add(graduateCoordinatorTitle)
-          .add(18, 18, 18)
-          .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
-            .add(postAnnouncementsButton)
-            .add(promoteUserButton)
-            .add(viewScheduleButton, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-          .add(40, 40, 40)
-          .add(jScrollPane1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 235, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-          .add(31, 31, 31)
-          .add(graduateCoordinatorExitButton)
-          .add(26, 26, 26))
-      );
+              .add(531, 531, 531)
+              .add(exitButton)))
+          .add(layout.createSequentialGroup()
+            .add(222, 222, 222)
+            .add(graduateCoordinatorTitle)))
+        .addContainerGap(19, Short.MAX_VALUE))
+    );
+    layout.setVerticalGroup(
+      layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+      .add(layout.createSequentialGroup()
+        .add(22, 22, 22)
+        .add(graduateCoordinatorTitle)
+        .add(18, 18, 18)
+        .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
+          .add(postAnnouncementsButton)
+          .add(promoteUserButton)
+          .add(viewScheduleButton, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        .add(306, 306, 306)
+        .add(exitButton)
+        .add(26, 26, 26))
+    );
 
-      pack();
-    }// </editor-fold>//GEN-END:initComponents
+    pack();
+  }// </editor-fold>//GEN-END:initComponents
   //This button adds a student user
     private void promoteUserButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_promoteUserButtonActionPerformed
       ArrayList<BasicUser> users = this.LoggedInUser.connection.getPotentialUsers();
       new ViewUsersGUI(users, this.LoggedInUser.connection);
     }//GEN-LAST:event_promoteUserButtonActionPerformed
   //This button exits the GUI and opens a new login window
-    private void graduateCoordinatorExitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_graduateCoordinatorExitButtonActionPerformed
+    private void exitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitButtonActionPerformed
       try {
         new LoginGUI(new javax.swing.JFrame(), true);
       } catch(Exception ex) {
         Logger.getLogger(HighPermUserGUI.class.getName()).log(Level.SEVERE, null, ex);
       }
       this.dispose();
-    }//GEN-LAST:event_graduateCoordinatorExitButtonActionPerformed
+    }//GEN-LAST:event_exitButtonActionPerformed
   //This button adds a new announcement to the announcement table
     private void postAnnouncementsButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_postAnnouncementsButtonActionPerformed
       AddAnouncementGUI announce = new AddAnouncementGUI(LoggedInUser);
@@ -196,22 +130,9 @@ public class HighPermUserGUI extends BasicGUI{
   //This creates the announcement table by looping through the database and adding new announcements
   //to the announcement table retrieve from MongoDB
 
-  public void updateAnnouncementTable(){
-    this.announcementData = this.LoggedInUser.connection.getRecentAnnouncements();
-    if(this.announcementData == null){
-      this.announcementData = new ArrayList<Announcement>();
-    }
-    for(int i = 0; i < announcementData.size(); i++){
-      announcementTable.setValueAt(announcementData.get(i).author, i, 0);
-      announcementTable.setValueAt(announcementData.get(i).title, i, 1);
-      announcementTable.setValueAt(announcementData.get(i).body, i, 2);
-    }
-  }
   // Variables declaration - do not modify//GEN-BEGIN:variables
-  private javax.swing.JTable announcementTable;
-  private javax.swing.JButton graduateCoordinatorExitButton;
+  private javax.swing.JButton exitButton;
   private javax.swing.JLabel graduateCoordinatorTitle;
-  private javax.swing.JScrollPane jScrollPane1;
   private javax.swing.JButton postAnnouncementsButton;
   private javax.swing.JButton promoteUserButton;
   private javax.swing.JButton viewScheduleButton;

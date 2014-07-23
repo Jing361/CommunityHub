@@ -15,25 +15,10 @@ import javax.swing.JFileChooser;
 import javax.swing.table.AbstractTableModel;
 
 public class LowPermUserGUI extends BasicGUI{
-  ArrayList<Announcement> announcementData;
-
   public LowPermUserGUI(LowPermUser user){
     super(user);
-    announcementData = this.LoggedInUser.connection.getRecentAnnouncements();
-    this.LoggedInUser = user;
-
     initComponents();
     //This sets the table so user can view posts in a forum table by looping
-    announcementTable.getColumnModel().getColumn(0).setHeaderValue("Author");
-    announcementTable.getColumnModel().getColumn(1).setHeaderValue("Title");
-    announcementTable.getColumnModel().getColumn(2).setHeaderValue("Body");
-
-    for(int i = 0; i < announcementData.size(); i++){
-      announcementTable.setValueAt(announcementData.get(i).author, i, 0);
-      announcementTable.setValueAt(announcementData.get(i).title, i, 1);
-      announcementTable.setValueAt(announcementData.get(i).body, i, 2);
-    }
-
     this.setVisible(true);
   }
 
@@ -50,8 +35,6 @@ public class LowPermUserGUI extends BasicGUI{
     submitQueryButton = new javax.swing.JButton();
     pageTitle = new javax.swing.JLabel();
     uploadFormsButton = new javax.swing.JButton();
-    jScrollPane1 = new javax.swing.JScrollPane();
-    announcementTable = new javax.swing.JTable();
     announcementsLabel = new javax.swing.JLabel();
     viewForumButton = new javax.swing.JButton();
     exitButton = new javax.swing.JButton();
@@ -84,135 +67,80 @@ public class LowPermUserGUI extends BasicGUI{
       }
     });
 
-    announcementTable.setModel(new AbstractTableModel()
-      {
-        @Override
-        public int getRowCount()
-        {
-          return announcementData.size();
-        }
+    announcementsLabel.setText("Announcements");
 
-        @Override
-        public int getColumnCount()
-        {
-          return 3;
-        }
+    viewForumButton.setText("View Forum");
+    viewForumButton.addActionListener(new java.awt.event.ActionListener() {
+      public void actionPerformed(java.awt.event.ActionEvent evt) {
+        viewForumButtonActionPerformed(evt);
+      }
+    });
 
-        @Override
-        public String getValueAt(int i, int j)
-        {
-          String temp = null;
-          switch (j)
-          {
-            case 0:
-            temp = announcementData.get(i).author;
-            break;
-            case 1:
-            temp = announcementData.get(i).title;
-            break;
-            case 2:
-            temp = announcementData.get(i).body;
-            break;
-          }
-          return temp;
-        }
+    exitButton.setText("Exit");
+    exitButton.addActionListener(new java.awt.event.ActionListener() {
+      public void actionPerformed(java.awt.event.ActionEvent evt) {
+        exitButtonActionPerformed(evt);
+      }
+    });
 
-        public void setValueAt(String val, int i, int j)
-        {
-          switch (j)
-          {
-            case 1:
-            announcementData.get(i).author = val;
-            break;
-            case 2:
-            announcementData.get(i).title = val;
-            break;
-            case 3:
-            announcementData.get(i).body = val;
-            break;
-          }
-        }
-      });
-      jScrollPane1.setViewportView(announcementTable);
+    viewUploadedDocumentsButton.setText("View Uploaded Documents");
+    viewUploadedDocumentsButton.addActionListener(new java.awt.event.ActionListener() {
+      public void actionPerformed(java.awt.event.ActionEvent evt) {
+        viewUploadedDocumentsButtonActionPerformed(evt);
+      }
+    });
 
-      announcementsLabel.setText("Announcements");
-
-      viewForumButton.setText("View Forum");
-      viewForumButton.addActionListener(new java.awt.event.ActionListener() {
-        public void actionPerformed(java.awt.event.ActionEvent evt) {
-          viewForumButtonActionPerformed(evt);
-        }
-      });
-
-      exitButton.setText("Exit");
-      exitButton.addActionListener(new java.awt.event.ActionListener() {
-        public void actionPerformed(java.awt.event.ActionEvent evt) {
-          exitButtonActionPerformed(evt);
-        }
-      });
-
-      viewUploadedDocumentsButton.setText("View Uploaded Documents");
-      viewUploadedDocumentsButton.addActionListener(new java.awt.event.ActionListener() {
-        public void actionPerformed(java.awt.event.ActionEvent evt) {
-          viewUploadedDocumentsButtonActionPerformed(evt);
-        }
-      });
-
-      javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-      getContentPane().setLayout(layout);
-      layout.setHorizontalGroup(
-        layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-        .addGroup(layout.createSequentialGroup()
-          .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+    javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+    getContentPane().setLayout(layout);
+    layout.setHorizontalGroup(
+      layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+      .addGroup(layout.createSequentialGroup()
+        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+          .addGroup(layout.createSequentialGroup()
+            .addGap(426, 426, 426)
+            .addComponent(exitButton))
+          .addGroup(layout.createSequentialGroup()
+            .addGap(195, 195, 195)
+            .addComponent(pageTitle))
+          .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
             .addGroup(layout.createSequentialGroup()
-              .addGap(52, 52, 52)
-              .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                .addComponent(exitButton)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 427, javax.swing.GroupLayout.PREFERRED_SIZE)))
+              .addGap(234, 234, 234)
+              .addComponent(announcementsLabel)
+              .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+              .addComponent(viewUploadedDocumentsButton))
             .addGroup(layout.createSequentialGroup()
-              .addGap(195, 195, 195)
-              .addComponent(pageTitle))
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-              .addGroup(layout.createSequentialGroup()
-                .addGap(234, 234, 234)
-                .addComponent(announcementsLabel)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(viewUploadedDocumentsButton))
-              .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(studentPostRole, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(24, 24, 24)
-                .addComponent(submitQueryButton)
-                .addGap(18, 18, 18)
-                .addComponent(uploadFormsButton)
-                .addGap(18, 18, 18)
-                .addComponent(viewForumButton))))
-          .addContainerGap(19, Short.MAX_VALUE))
-      );
-      layout.setVerticalGroup(
-        layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-        .addGroup(layout.createSequentialGroup()
-          .addContainerGap()
-          .addComponent(pageTitle)
-          .addGap(18, 18, 18)
-          .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-            .addComponent(uploadFormsButton)
-            .addComponent(studentPostRole, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-            .addComponent(submitQueryButton)
-            .addComponent(viewForumButton))
-          .addGap(23, 23, 23)
-          .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-            .addComponent(announcementsLabel)
-            .addComponent(viewUploadedDocumentsButton))
-          .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-          .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 239, javax.swing.GroupLayout.PREFERRED_SIZE)
-          .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 38, Short.MAX_VALUE)
-          .addComponent(exitButton)
-          .addGap(22, 22, 22))
-      );
+              .addContainerGap()
+              .addComponent(studentPostRole, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+              .addGap(24, 24, 24)
+              .addComponent(submitQueryButton)
+              .addGap(18, 18, 18)
+              .addComponent(uploadFormsButton)
+              .addGap(18, 18, 18)
+              .addComponent(viewForumButton))))
+        .addContainerGap(19, Short.MAX_VALUE))
+    );
+    layout.setVerticalGroup(
+      layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+      .addGroup(layout.createSequentialGroup()
+        .addContainerGap()
+        .addComponent(pageTitle)
+        .addGap(18, 18, 18)
+        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+          .addComponent(uploadFormsButton)
+          .addComponent(studentPostRole, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+          .addComponent(submitQueryButton)
+          .addComponent(viewForumButton))
+        .addGap(23, 23, 23)
+        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+          .addComponent(announcementsLabel)
+          .addComponent(viewUploadedDocumentsButton))
+        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 288, Short.MAX_VALUE)
+        .addComponent(exitButton)
+        .addGap(22, 22, 22))
+    );
 
-      pack();
-    }// </editor-fold>//GEN-END:initComponents
+    pack();
+  }// </editor-fold>//GEN-END:initComponents
 
     private void studentPostRoleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_studentPostRoleActionPerformed
     }//GEN-LAST:event_studentPostRoleActionPerformed
@@ -247,10 +175,8 @@ public class LowPermUserGUI extends BasicGUI{
     private void viewUploadedDocumentsButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewUploadedDocumentsButtonActionPerformed
     }//GEN-LAST:event_viewUploadedDocumentsButtonActionPerformed
   // Variables declaration - do not modify//GEN-BEGIN:variables
-  private javax.swing.JTable announcementTable;
   private javax.swing.JLabel announcementsLabel;
   private javax.swing.JButton exitButton;
-  private javax.swing.JScrollPane jScrollPane1;
   private javax.swing.JLabel pageTitle;
   private javax.swing.JComboBox studentPostRole;
   private javax.swing.JButton submitQueryButton;

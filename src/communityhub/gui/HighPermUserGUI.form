@@ -24,21 +24,18 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" attributes="0">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" attributes="0">
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" attributes="0">
-                              <EmptySpace min="-2" pref="51" max="-2" attributes="0"/>
-                              <Component id="postAnnouncementsButton" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                              <Component id="promoteUserButton" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="viewScheduleButton" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                          <Group type="103" alignment="0" groupAlignment="1" attributes="0">
-                              <Component id="graduateCoordinatorExitButton" min="-2" max="-2" attributes="0"/>
-                              <Component id="jScrollPane1" min="-2" pref="574" max="-2" attributes="0"/>
-                          </Group>
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Group type="102" attributes="0">
+                          <EmptySpace min="-2" pref="61" max="-2" attributes="0"/>
+                          <Component id="postAnnouncementsButton" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                          <Component id="promoteUserButton" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="viewScheduleButton" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <Group type="102" alignment="0" attributes="0">
+                          <EmptySpace min="-2" pref="531" max="-2" attributes="0"/>
+                          <Component id="exitButton" min="-2" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
@@ -61,10 +58,8 @@
                   <Component id="promoteUserButton" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="viewScheduleButton" alignment="3" max="32767" attributes="0"/>
               </Group>
-              <EmptySpace min="-2" pref="40" max="-2" attributes="0"/>
-              <Component id="jScrollPane1" min="-2" pref="235" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
-              <Component id="graduateCoordinatorExitButton" min="-2" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="306" max="-2" attributes="0"/>
+              <Component id="exitButton" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
           </Group>
       </Group>
@@ -103,35 +98,13 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="viewScheduleButtonActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="graduateCoordinatorExitButton">
+    <Component class="javax.swing.JButton" name="exitButton">
       <Properties>
         <Property name="text" type="java.lang.String" value="Exit"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="graduateCoordinatorExitButtonActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="exitButtonActionPerformed"/>
       </Events>
     </Component>
-    <Container class="javax.swing.JScrollPane" name="jScrollPane1">
-      <AuxValues>
-        <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
-      </AuxValues>
-
-      <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
-      <SubComponents>
-        <Component class="javax.swing.JTable" name="announcementTable">
-          <Properties>
-            <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-              <Connection code="new AbstractTableModel()&#xd;&#xa;{&#xd;&#xa;    @Override&#xd;&#xa;    public int getRowCount()&#xd;&#xa;    {&#xd;&#xa;        return announcementData.size();&#xd;&#xa;    }&#xd;&#xa;&#xd;&#xa;    @Override&#xd;&#xa;    public int getColumnCount()&#xd;&#xa;    {&#xd;&#xa;        return 3;&#xd;&#xa;    }&#xd;&#xa;&#xd;&#xa;    @Override&#xd;&#xa;    public String getValueAt(int i, int j)&#xd;&#xa;    {&#xd;&#xa;        String temp = null;&#xd;&#xa;        switch (j)&#xd;&#xa;        {&#xd;&#xa;            case 0:&#xd;&#xa;                temp = announcementData.get(i).author;&#xd;&#xa;                break;&#xd;&#xa;            case 1:&#xd;&#xa;                temp = announcementData.get(i).title;&#xd;&#xa;                break;&#xd;&#xa;            case 2:&#xd;&#xa;                temp = announcementData.get(i).body;&#xd;&#xa;                break;&#xd;&#xa;        }&#xd;&#xa;        return temp;&#xd;&#xa;    }&#xd;&#xa;&#xd;&#xa;    public void setValueAt(String val, int i, int j)&#xd;&#xa;    {&#xd;&#xa;        switch (j)&#xd;&#xa;        {&#xd;&#xa;            case 1:&#xd;&#xa;                announcementData.get(i).author = val;&#xd;&#xa;                break;&#xd;&#xa;            case 2:&#xd;&#xa;                announcementData.get(i).title = val;&#xd;&#xa;                break;&#xd;&#xa;            case 3:&#xd;&#xa;                announcementData.get(i).body = val;&#xd;&#xa;                break;&#xd;&#xa;        }&#xd;&#xa;    }&#xd;&#xa;}" type="code"/>
-            </Property>
-            <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
-              <TableColumnModel selectionModel="0"/>
-            </Property>
-            <Property name="tableHeader" type="javax.swing.table.JTableHeader" editor="org.netbeans.modules.form.editors2.JTableHeaderEditor">
-              <TableHeader reorderingAllowed="true" resizingAllowed="true"/>
-            </Property>
-          </Properties>
-        </Component>
-      </SubComponents>
-    </Container>
   </SubComponents>
 </Form>

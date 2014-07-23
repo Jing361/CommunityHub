@@ -13,26 +13,10 @@ import javax.swing.JFileChooser;
 import javax.swing.table.AbstractTableModel;
 
 public class MidPermUserGUI extends BasicGUI{
-  ArrayList<Announcement> announcementData;
-
   public MidPermUserGUI(MidPermUser user){
     super(user);
     //gets announcement data and fills the table by using a for loop
-    LoggedInUser = user;
-    announcementData = this.LoggedInUser.connection.getRecentAnnouncements();
-
     initComponents();
-
-    System.out.println(announcementTable);
-    announcementTable.getColumnModel().getColumn(0).setHeaderValue("Author");
-    announcementTable.getColumnModel().getColumn(1).setHeaderValue("Title");
-    announcementTable.getColumnModel().getColumn(2).setHeaderValue("Body");
-
-    for(int i = 0; i < announcementData.size(); i++){
-      announcementTable.setValueAt(announcementData.get(i).author, i, 0);
-      announcementTable.setValueAt(announcementData.get(i).title, i, 1);
-      announcementTable.setValueAt(announcementData.get(i).body, i, 2);
-    }
 
     setVisible(true);
   }
@@ -52,8 +36,6 @@ public class MidPermUserGUI extends BasicGUI{
     viewDocumentsButton = new javax.swing.JButton();
     submitScheduleButton = new javax.swing.JButton();
     exitButton = new javax.swing.JButton();
-    jScrollPane1 = new javax.swing.JScrollPane();
-    announcementTable = new javax.swing.JTable();
 
     setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -95,101 +77,47 @@ public class MidPermUserGUI extends BasicGUI{
       }
     });
 
-    announcementTable.setModel(new AbstractTableModel()
-      {
-        @Override
-        public int getRowCount()
-        {
-          return announcementData.size();
-        }
+    org.jdesktop.layout.GroupLayout layout = new org.jdesktop.layout.GroupLayout(getContentPane());
+    getContentPane().setLayout(layout);
+    layout.setHorizontalGroup(
+      layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+      .add(layout.createSequentialGroup()
+        .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+          .add(layout.createSequentialGroup()
+            .addContainerGap()
+            .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING)
+              .add(exitButton)
+              .add(layout.createSequentialGroup()
+                .add(postAnnouncementButton)
+                .add(18, 18, 18)
+                .add(viewStudentQueriesButton)
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
+                .add(submitScheduleButton)
+                .add(18, 18, 18)
+                .add(viewDocumentsButton))))
+          .add(layout.createSequentialGroup()
+            .add(202, 202, 202)
+            .add(graduateAssistantLoginTitle)))
+        .addContainerGap(25, Short.MAX_VALUE))
+    );
+    layout.setVerticalGroup(
+      layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+      .add(layout.createSequentialGroup()
+        .add(20, 20, 20)
+        .add(graduateAssistantLoginTitle)
+        .add(18, 18, 18)
+        .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
+          .add(postAnnouncementButton)
+          .add(viewStudentQueriesButton)
+          .add(viewDocumentsButton)
+          .add(submitScheduleButton))
+        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, 309, Short.MAX_VALUE)
+        .add(exitButton)
+        .add(29, 29, 29))
+    );
 
-        @Override
-        public int getColumnCount()
-        {
-          return 3;
-        }
-
-        @Override
-        public String getValueAt(int i, int j)
-        {
-          String temp = null;
-          switch (j)
-          {
-            case 0:
-            temp = announcementData.get(i).author;
-            break;
-            case 1:
-            temp = announcementData.get(i).title;
-            break;
-            case 2:
-            temp = announcementData.get(i).body;
-            break;
-          }
-          return temp;
-        }
-
-        public void setValueAt(String val, int i, int j)
-        {
-          switch (j)
-          {
-            case 1:
-            announcementData.get(i).author = val;
-            break;
-            case 2:
-            announcementData.get(i).title = val;
-            break;
-            case 3:
-            announcementData.get(i).body = val;
-            break;
-          }
-        }
-      });
-      jScrollPane1.setViewportView(announcementTable);
-
-      org.jdesktop.layout.GroupLayout layout = new org.jdesktop.layout.GroupLayout(getContentPane());
-      getContentPane().setLayout(layout);
-      layout.setHorizontalGroup(
-        layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-        .add(layout.createSequentialGroup()
-          .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(layout.createSequentialGroup()
-              .addContainerGap()
-              .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING)
-                .add(exitButton)
-                .add(jScrollPane1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 574, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                .add(layout.createSequentialGroup()
-                  .add(postAnnouncementButton)
-                  .add(18, 18, 18)
-                  .add(viewStudentQueriesButton)
-                  .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
-                  .add(submitScheduleButton)
-                  .add(18, 18, 18)
-                  .add(viewDocumentsButton))))
-            .add(layout.createSequentialGroup()
-              .add(202, 202, 202)
-              .add(graduateAssistantLoginTitle)))
-          .addContainerGap(25, Short.MAX_VALUE))
-      );
-      layout.setVerticalGroup(
-        layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-        .add(layout.createSequentialGroup()
-          .add(20, 20, 20)
-          .add(graduateAssistantLoginTitle)
-          .add(18, 18, 18)
-          .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
-            .add(postAnnouncementButton)
-            .add(viewStudentQueriesButton)
-            .add(viewDocumentsButton)
-            .add(submitScheduleButton))
-          .add(39, 39, 39)
-          .add(jScrollPane1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 235, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-          .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, 35, Short.MAX_VALUE)
-          .add(exitButton)
-          .add(29, 29, 29))
-      );
-
-      pack();
-    }// </editor-fold>//GEN-END:initComponents
+    pack();
+  }// </editor-fold>//GEN-END:initComponents
   //This button exits the GraduateAssistantGUI and opens a login form
     private void exitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitButtonActionPerformed
       try {
@@ -220,10 +148,8 @@ public class MidPermUserGUI extends BasicGUI{
     private void submitScheduleButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_submitScheduleButtonActionPerformed
     }//GEN-LAST:event_submitScheduleButtonActionPerformed
   // Variables declaration - do not modify//GEN-BEGIN:variables
-  private javax.swing.JTable announcementTable;
   private javax.swing.JButton exitButton;
   private javax.swing.JLabel graduateAssistantLoginTitle;
-  private javax.swing.JScrollPane jScrollPane1;
   private javax.swing.JButton postAnnouncementButton;
   private javax.swing.JButton submitScheduleButton;
   private javax.swing.JButton viewDocumentsButton;
