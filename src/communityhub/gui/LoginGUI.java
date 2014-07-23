@@ -161,6 +161,11 @@ public class LoginGUI extends javax.swing.JDialog{
   }//GEN-LAST:event_usernameFieldActionPerformed
 
   private void exitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitButtonActionPerformed
+    try {
+      this.db.close();
+    } catch(SQLException ex) {
+      Logger.getLogger(LoginGUI.class.getName()).log(Level.SEVERE, null, ex);
+    }
     System.exit(0);
   }//GEN-LAST:event_exitButtonActionPerformed
 

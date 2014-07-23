@@ -23,19 +23,6 @@ public class Database{
   public Database() throws ClassNotFoundException, InstantiationException, IllegalAccessException, SQLException{
     Class.forName("com.mysql.jdbc.Driver").newInstance();
     this.conn = DriverManager.getConnection("jdbc:mysql://174.102.54.43/communityhub", "commhubuser", "foobar");
-/*
-    String query = "SELECT * from user;";
-    Statement stmt = this.conn.createStatement();
-    ResultSet rs = stmt.executeQuery(query);
-    while(rs.next()){
-      System.out.print(rs.getString("username"));
-      System.out.print("\t");
-      System.out.print(rs.getString("password"));
-      System.out.print("\t");
-      System.out.print(rs.getString("role"));
-      System.out.print("\n");
-    }
-*/
   }
   
   public void close() throws SQLException{
