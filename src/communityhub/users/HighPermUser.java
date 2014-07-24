@@ -10,7 +10,7 @@ public class HighPermUser extends BasicUser{
     super(username, password, conn);
   }
 
-  public UUID newAnnouncement(String title, String body){
+  public String newAnnouncement(String title, String body){
     return this.connection.createAnnouncement(new Announcement(this.username, title, body));
   }
 

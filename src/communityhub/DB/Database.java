@@ -62,11 +62,11 @@ public class Database{
   }
 
   // given an announcement object, it creates it in the db
-  public UUID createAnnouncement(Announcement ann){
+  public String createAnnouncement(Announcement ann){
     return null;
   }
 
-  public boolean editAnnouncement(UUID oldID, Announcement newAnn){
+  public boolean editAnnouncement(String oldID, Announcement newAnn){
     return false;
   }
 
@@ -82,11 +82,11 @@ public class Database{
     return false;
   }
 
-  public UUID CreatePost(Post p){
+  public String CreatePost(Post p){
     return null;
   }
 
-  public boolean editPost(UUID oldID, Post p){
+  public boolean editPost(String oldID, Post p){
     return false;
   }
 
@@ -98,7 +98,7 @@ public class Database{
     return null;
   }
 
-  public boolean deletePost(UUID postID){
+  public boolean deletePost(String postID){
     return false;
   }
 

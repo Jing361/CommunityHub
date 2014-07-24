@@ -20,7 +20,7 @@ public class BasicUser {
     return new BasicGUI(this);
   }
   
-  public UUID newPost(String title, String body){
+  public String newPost(String title, String body){
     return this.connection.CreatePost(new Post(this.username, title, body));
   }
   

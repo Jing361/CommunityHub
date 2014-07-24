@@ -167,12 +167,7 @@ public class LoginGUI extends javax.swing.JDialog{
   }//GEN-LAST:event_usernameFieldActionPerformed
 
   private void exitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitButtonActionPerformed
-    try {
-      this.db.close();
-    } catch(SQLException ex) {
-      Logger.getLogger(LoginGUI.class.getName()).log(Level.SEVERE, null, ex);
-    }
-    System.exit(0);
+    this.formWindowClosed(null);
   }//GEN-LAST:event_exitButtonActionPerformed
 
   private void passwordFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_passwordFieldActionPerformed
@@ -180,7 +175,12 @@ public class LoginGUI extends javax.swing.JDialog{
   }//GEN-LAST:event_passwordFieldActionPerformed
 
   private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
-    this.exitButtonActionPerformed(null);
+    try {
+      this.db.close();
+    } catch(SQLException ex) {
+      Logger.getLogger(LoginGUI.class.getName()).log(Level.SEVERE, null, ex);
+    }
+    System.exit(0);
   }//GEN-LAST:event_formWindowClosed
 
   /**
