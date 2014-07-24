@@ -31,7 +31,6 @@ public class HighPermUserGUI extends BasicGUI{
     promoteUserButton = new javax.swing.JButton();
     postAnnouncementsButton = new javax.swing.JButton();
     viewScheduleButton = new javax.swing.JButton();
-    exitButton = new javax.swing.JButton();
 
     setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -59,34 +58,23 @@ public class HighPermUserGUI extends BasicGUI{
       }
     });
 
-    exitButton.setText("Exit");
-    exitButton.addActionListener(new java.awt.event.ActionListener() {
-      public void actionPerformed(java.awt.event.ActionEvent evt) {
-        exitButtonActionPerformed(evt);
-      }
-    });
-
     org.jdesktop.layout.GroupLayout layout = new org.jdesktop.layout.GroupLayout(getContentPane());
     getContentPane().setLayout(layout);
     layout.setHorizontalGroup(
       layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
       .add(layout.createSequentialGroup()
         .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-          .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(layout.createSequentialGroup()
-              .add(61, 61, 61)
-              .add(postAnnouncementsButton)
-              .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
-              .add(promoteUserButton)
-              .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-              .add(viewScheduleButton))
-            .add(layout.createSequentialGroup()
-              .add(531, 531, 531)
-              .add(exitButton)))
+          .add(layout.createSequentialGroup()
+            .add(61, 61, 61)
+            .add(postAnnouncementsButton)
+            .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
+            .add(promoteUserButton)
+            .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+            .add(viewScheduleButton))
           .add(layout.createSequentialGroup()
             .add(222, 222, 222)
             .add(graduateCoordinatorTitle)))
-        .addContainerGap(19, Short.MAX_VALUE))
+        .addContainerGap(97, Short.MAX_VALUE))
     );
     layout.setVerticalGroup(
       layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
@@ -98,9 +86,7 @@ public class HighPermUserGUI extends BasicGUI{
           .add(postAnnouncementsButton)
           .add(promoteUserButton)
           .add(viewScheduleButton, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        .add(306, 306, 306)
-        .add(exitButton)
-        .add(26, 26, 26))
+        .add(355, 355, 355))
     );
 
     pack();
@@ -110,16 +96,8 @@ public class HighPermUserGUI extends BasicGUI{
       ArrayList<BasicUser> users = this.LoggedInUser.connection.getPotentialUsers();
       new ViewUsersGUI(users, this.LoggedInUser.connection);
     }//GEN-LAST:event_promoteUserButtonActionPerformed
-  //This button exits the GUI and opens a new login window
-    private void exitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitButtonActionPerformed
-      try {
-        new LoginGUI(new javax.swing.JFrame(), true);
-      } catch(Exception ex) {
-        Logger.getLogger(HighPermUserGUI.class.getName()).log(Level.SEVERE, null, ex);
-      }
-      this.dispose();
-    }//GEN-LAST:event_exitButtonActionPerformed
-  //This button adds a new announcement to the announcement table
+
+ //This button adds a new announcement to the announcement table
     private void postAnnouncementsButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_postAnnouncementsButtonActionPerformed
       AddAnouncementGUI announce = new AddAnouncementGUI(LoggedInUser);
       this.dispose();
@@ -131,7 +109,6 @@ public class HighPermUserGUI extends BasicGUI{
   //to the announcement table retrieve from MongoDB
 
   // Variables declaration - do not modify//GEN-BEGIN:variables
-  private javax.swing.JButton exitButton;
   private javax.swing.JLabel graduateCoordinatorTitle;
   private javax.swing.JButton postAnnouncementsButton;
   private javax.swing.JButton promoteUserButton;

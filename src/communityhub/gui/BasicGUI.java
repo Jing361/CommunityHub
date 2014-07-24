@@ -3,6 +3,8 @@ package communityhub.gui;
 import communityhub.Announcement;
 import communityhub.users.BasicUser;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.table.AbstractTableModel;
 
 public class BasicGUI extends javax.swing.JFrame {
@@ -29,8 +31,14 @@ public class BasicGUI extends javax.swing.JFrame {
 
     jScrollPane1 = new javax.swing.JScrollPane();
     announcementTable = new javax.swing.JTable();
+    exitButton = new javax.swing.JButton();
 
     setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+    addWindowListener(new java.awt.event.WindowAdapter() {
+      public void windowClosed(java.awt.event.WindowEvent evt) {
+        formWindowClosed(evt);
+      }
+    });
 
     announcementTable.setModel(new AbstractTableModel()
       {
@@ -83,6 +91,13 @@ public class BasicGUI extends javax.swing.JFrame {
       });
       jScrollPane1.setViewportView(announcementTable);
 
+      exitButton.setText("Exit");
+      exitButton.addActionListener(new java.awt.event.ActionListener() {
+        public void actionPerformed(java.awt.event.ActionEvent evt) {
+          exitButtonActionPerformed(evt);
+        }
+      });
+
       javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
       getContentPane().setLayout(layout);
       layout.setHorizontalGroup(
@@ -91,17 +106,37 @@ public class BasicGUI extends javax.swing.JFrame {
           .addContainerGap()
           .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 574, javax.swing.GroupLayout.PREFERRED_SIZE)
           .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+          .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+          .addComponent(exitButton)
+          .addContainerGap())
       );
       layout.setVerticalGroup(
         layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-          .addContainerGap(98, Short.MAX_VALUE)
+        .addGroup(layout.createSequentialGroup()
+          .addContainerGap(101, Short.MAX_VALUE)
           .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 235, javax.swing.GroupLayout.PREFERRED_SIZE)
+          .addGap(18, 18, 18)
+          .addComponent(exitButton)
           .addContainerGap())
       );
 
       pack();
     }// </editor-fold>//GEN-END:initComponents
+
+  private void exitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitButtonActionPerformed
+    this.formWindowClosed(null);
+  }//GEN-LAST:event_exitButtonActionPerformed
+
+  private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
+    try {
+      new LoginGUI(new javax.swing.JFrame(), true);
+      this.dispose();
+    } catch(Exception ex) {
+      Logger.getLogger(HighPermUserGUI.class.getName()).log(Level.SEVERE, null, ex);
+    }
+  }//GEN-LAST:event_formWindowClosed
+
   public void updateAnnouncementTable(){
     this.announcementData = this.LoggedInUser.connection.getRecentAnnouncements();
     if(this.announcementData == null){
@@ -116,6 +151,7 @@ public class BasicGUI extends javax.swing.JFrame {
 
   // Variables declaration - do not modify//GEN-BEGIN:variables
   protected javax.swing.JTable announcementTable;
+  private javax.swing.JButton exitButton;
   private javax.swing.JScrollPane jScrollPane1;
   // End of variables declaration//GEN-END:variables
 }

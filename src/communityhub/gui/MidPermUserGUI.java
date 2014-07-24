@@ -35,7 +35,6 @@ public class MidPermUserGUI extends BasicGUI{
     viewStudentQueriesButton = new javax.swing.JButton();
     viewDocumentsButton = new javax.swing.JButton();
     submitScheduleButton = new javax.swing.JButton();
-    exitButton = new javax.swing.JButton();
 
     setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -70,13 +69,6 @@ public class MidPermUserGUI extends BasicGUI{
       }
     });
 
-    exitButton.setText("Exit");
-    exitButton.addActionListener(new java.awt.event.ActionListener() {
-      public void actionPerformed(java.awt.event.ActionEvent evt) {
-        exitButtonActionPerformed(evt);
-      }
-    });
-
     org.jdesktop.layout.GroupLayout layout = new org.jdesktop.layout.GroupLayout(getContentPane());
     getContentPane().setLayout(layout);
     layout.setHorizontalGroup(
@@ -85,16 +77,13 @@ public class MidPermUserGUI extends BasicGUI{
         .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
           .add(layout.createSequentialGroup()
             .addContainerGap()
-            .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING)
-              .add(exitButton)
-              .add(layout.createSequentialGroup()
-                .add(postAnnouncementButton)
-                .add(18, 18, 18)
-                .add(viewStudentQueriesButton)
-                .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
-                .add(submitScheduleButton)
-                .add(18, 18, 18)
-                .add(viewDocumentsButton))))
+            .add(postAnnouncementButton)
+            .add(18, 18, 18)
+            .add(viewStudentQueriesButton)
+            .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
+            .add(submitScheduleButton)
+            .add(18, 18, 18)
+            .add(viewDocumentsButton))
           .add(layout.createSequentialGroup()
             .add(202, 202, 202)
             .add(graduateAssistantLoginTitle)))
@@ -111,23 +100,13 @@ public class MidPermUserGUI extends BasicGUI{
           .add(viewStudentQueriesButton)
           .add(viewDocumentsButton)
           .add(submitScheduleButton))
-        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, 309, Short.MAX_VALUE)
-        .add(exitButton)
-        .add(29, 29, 29))
+        .addContainerGap(361, Short.MAX_VALUE))
     );
 
     pack();
   }// </editor-fold>//GEN-END:initComponents
-  //This button exits the GraduateAssistantGUI and opens a login form
-    private void exitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitButtonActionPerformed
-      try {
-        new LoginGUI(new javax.swing.JFrame(), true);
-      } catch(Exception ex) {
-        Logger.getLogger(MidPermUserGUI.class.getName()).log(Level.SEVERE, null, ex);
-      }
-      this.dispose();
-    }//GEN-LAST:event_exitButtonActionPerformed
-  //This button opens a page to add a new announcement
+
+ //This button opens a page to add a new announcement
     private void postAnnouncementButtonActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_postAnnouncementButtonActionPerformed
     {//GEN-HEADEREND:event_postAnnouncementButtonActionPerformed
       AddAnouncementGUI announce = new AddAnouncementGUI(LoggedInUser);
@@ -148,7 +127,6 @@ public class MidPermUserGUI extends BasicGUI{
     private void submitScheduleButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_submitScheduleButtonActionPerformed
     }//GEN-LAST:event_submitScheduleButtonActionPerformed
   // Variables declaration - do not modify//GEN-BEGIN:variables
-  private javax.swing.JButton exitButton;
   private javax.swing.JLabel graduateAssistantLoginTitle;
   private javax.swing.JButton postAnnouncementButton;
   private javax.swing.JButton submitScheduleButton;

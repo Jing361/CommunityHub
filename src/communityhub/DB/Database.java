@@ -25,8 +25,12 @@ public class Database{
     this.conn = DriverManager.getConnection("jdbc:mysql://174.102.54.43/communityhub", "commhubuser", "foobar");
   }
   
-  public void close() throws SQLException{
-    this.conn.close();
+  public void close(){
+    try {
+      this.conn.close();
+    } catch(SQLException ex) {
+      Logger.getLogger(Database.class.getName()).log(Level.SEVERE, null, ex);
+    }
   }
   
   public BasicUser lookUp(String username, char[] password){

@@ -37,7 +37,6 @@ public class LowPermUserGUI extends BasicGUI{
     uploadFormsButton = new javax.swing.JButton();
     announcementsLabel = new javax.swing.JLabel();
     viewForumButton = new javax.swing.JButton();
-    exitButton = new javax.swing.JButton();
     viewUploadedDocumentsButton = new javax.swing.JButton();
 
     setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -76,13 +75,6 @@ public class LowPermUserGUI extends BasicGUI{
       }
     });
 
-    exitButton.setText("Exit");
-    exitButton.addActionListener(new java.awt.event.ActionListener() {
-      public void actionPerformed(java.awt.event.ActionEvent evt) {
-        exitButtonActionPerformed(evt);
-      }
-    });
-
     viewUploadedDocumentsButton.setText("View Uploaded Documents");
     viewUploadedDocumentsButton.addActionListener(new java.awt.event.ActionListener() {
       public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -96,9 +88,6 @@ public class LowPermUserGUI extends BasicGUI{
       layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
       .addGroup(layout.createSequentialGroup()
         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-          .addGroup(layout.createSequentialGroup()
-            .addGap(426, 426, 426)
-            .addComponent(exitButton))
           .addGroup(layout.createSequentialGroup()
             .addGap(195, 195, 195)
             .addComponent(pageTitle))
@@ -134,9 +123,7 @@ public class LowPermUserGUI extends BasicGUI{
         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
           .addComponent(announcementsLabel)
           .addComponent(viewUploadedDocumentsButton))
-        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 288, Short.MAX_VALUE)
-        .addComponent(exitButton)
-        .addGap(22, 22, 22))
+        .addContainerGap(333, Short.MAX_VALUE))
     );
 
     pack();
@@ -162,21 +149,12 @@ public class LowPermUserGUI extends BasicGUI{
 
       table.setVisible(true);
     }//GEN-LAST:event_viewForumButtonActionPerformed
-  //This button press opens a new login screen and closes the student GUI
-    private void exitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitButtonActionPerformed
-      try {
-        new LoginGUI(new javax.swing.JFrame(), true);
-      } catch(Exception ex) {
-        Logger.getLogger(LowPermUserGUI.class.getName()).log(Level.SEVERE, null, ex);
-      }
-      this.dispose();
-    }//GEN-LAST:event_exitButtonActionPerformed
-  //This button press opens a new window to view documents that have been uploaded
+
+ //This button press opens a new window to view documents that have been uploaded
     private void viewUploadedDocumentsButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewUploadedDocumentsButtonActionPerformed
     }//GEN-LAST:event_viewUploadedDocumentsButtonActionPerformed
   // Variables declaration - do not modify//GEN-BEGIN:variables
   private javax.swing.JLabel announcementsLabel;
-  private javax.swing.JButton exitButton;
   private javax.swing.JLabel pageTitle;
   private javax.swing.JComboBox studentPostRole;
   private javax.swing.JButton submitQueryButton;
