@@ -7,11 +7,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class LoginGUI extends javax.swing.JDialog{
-  Database db = null;
-
   public LoginGUI(java.awt.Frame parent, boolean modal) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException{
     super(parent, modal);
-    this.db = new Database();
     initComponents();
   }
 
@@ -35,11 +32,6 @@ public class LoginGUI extends javax.swing.JDialog{
     failureLabel = new javax.swing.JLabel();
 
     setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-    addWindowListener(new java.awt.event.WindowAdapter() {
-      public void windowClosed(java.awt.event.WindowEvent evt) {
-        formWindowClosed(evt);
-      }
-    });
 
     passwordField.setText("admin");
     passwordField.addActionListener(new java.awt.event.ActionListener() {
@@ -152,11 +144,11 @@ public class LoginGUI extends javax.swing.JDialog{
 
     username = usernameField.getText(); //get username from text box
     password = passwordField.getPassword(); //get password from password box
-    result = this.db.lookUp(username, password);
+    result = Database.lookUp(username, password);
 
     if(result != null){
       this.dispose();
-      result.SpawnGui();
+      result.SpawnGui().setVisible(true);
     } else {
       failureLabel.setText("No user found!");
     }
@@ -167,21 +159,12 @@ public class LoginGUI extends javax.swing.JDialog{
   }//GEN-LAST:event_usernameFieldActionPerformed
 
   private void exitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitButtonActionPerformed
-    try {
-      this.db.close();
-      System.exit(0);
-    } catch(SQLException ex) {
-      Logger.getLogger(LoginGUI.class.getName()).log(Level.SEVERE, null, ex);
-    }
+    System.exit(0);
   }//GEN-LAST:event_exitButtonActionPerformed
 
   private void passwordFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_passwordFieldActionPerformed
     this.submitButtonActionPerformed(evt);
   }//GEN-LAST:event_passwordFieldActionPerformed
-
-  private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
-
-  }//GEN-LAST:event_formWindowClosed
 
   /**
    * @param args the command line arguments
@@ -209,24 +192,19 @@ public class LoginGUI extends javax.swing.JDialog{
       java.util.logging.Logger.getLogger(LoginGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
     }
     //</editor-fold>
-
+    
+    try {
+      Class.forName("com.mysql.jdbc.Driver").newInstance();
+    } catch(Exception ex) {
+      Logger.getLogger(LoginGUI.class.getName()).log(Level.SEVERE, null, ex);
+    }
     /* Create and display the dialog */
     java.awt.EventQueue.invokeLater(new Runnable(){
       public void run(){
-        LoginGUI dialog = null;
         try {
-          dialog = new LoginGUI(new javax.swing.JFrame(), true);
+          new LoginGUI(new javax.swing.JFrame(), true).setVisible(true);
         } catch(Exception ex) {
           Logger.getLogger(LoginGUI.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        if(dialog != null){
-          dialog.addWindowListener(new java.awt.event.WindowAdapter(){
-            @Override
-            public void windowClosing(java.awt.event.WindowEvent e){
-              System.exit(0);
-            }
-          });
-          dialog.setVisible(true);
         }
       }
     });

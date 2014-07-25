@@ -19,7 +19,6 @@ public class LowPermUserGUI extends BasicGUI{
     super(user);
     initComponents();
     //This sets the table so user can view posts in a forum table by looping
-    this.setVisible(true);
   }
 
   /**
@@ -133,8 +132,8 @@ public class LowPermUserGUI extends BasicGUI{
     }//GEN-LAST:event_studentPostRoleActionPerformed
 
     private void submitQueryButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_submitQueryButtonActionPerformed
-      new AddPostGUI(this.LoggedInUser);
-      this.dispose();
+      new AddPostGUI(this.LoggedInUser).setVisible(true);
+      //Keep user view open
     }//GEN-LAST:event_submitQueryButtonActionPerformed
   //This button press opens a directory viewer for students to upload forms
   //where only PDF files are viewable, and saves the file directory to the database
@@ -143,11 +142,9 @@ public class LowPermUserGUI extends BasicGUI{
   //This button press action opens the forum and 
   //displays the database list of posts in a table view
     private void viewForumButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewForumButtonActionPerformed
-      ArrayList<Post> forumPosts = this.LoggedInUser.connection.getRecentPosts(this.LoggedInUser);
+      ArrayList<Post> forumPosts = Database.getRecentPosts(this.LoggedInUser);
 
-      ForumGUI table = new ForumGUI(forumPosts, this.LoggedInUser);
-
-      table.setVisible(true);
+      new ForumGUI(forumPosts, this.LoggedInUser).setVisible(true);
     }//GEN-LAST:event_viewForumButtonActionPerformed
 
  //This button press opens a new window to view documents that have been uploaded

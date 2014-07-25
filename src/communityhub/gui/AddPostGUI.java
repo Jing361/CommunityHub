@@ -10,21 +10,14 @@ public class AddPostGUI extends javax.swing.JFrame{
   BasicUser user;
   Post replyTo = null;
 
-  // default constructor
-  public AddPostGUI(){
-  }
-
-  public AddPostGUI(BasicUser jim){
+  public AddPostGUI(BasicUser user){
     initComponents();
-    user = jim;
-    this.setVisible(true);
+    this.user = user;
   }
 
   public AddPostGUI(Post replyTo, BasicUser user){
-    initComponents();
+    this(user);
     this.replyTo = replyTo;
-    this.user = user;
-    this.setVisible(true);
   }
 
   /*
@@ -120,13 +113,12 @@ public class AddPostGUI extends javax.swing.JFrame{
       }
       // else leave it as null
 
-      this.user.connection.CreatePost(new Post(user.username, title, body));
-      new ForumGUI(this.user.connection.getRecentPosts(user), user);
+      Database.CreatePost(new Post(user.username, title, body));
+      new ForumGUI(Database.getRecentPosts(user), user).setVisible(true);
       this.dispose();
     }//GEN-LAST:event_submitActionPerformed
 
     private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelButtonActionPerformed
-      user.SpawnGui();
       this.dispose();
     }//GEN-LAST:event_cancelButtonActionPerformed
 

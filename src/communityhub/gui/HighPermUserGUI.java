@@ -14,8 +14,6 @@ public class HighPermUserGUI extends BasicGUI{
   public HighPermUserGUI(HighPermUser user){
     super(user);
     this.initComponents();
-
-    setVisible(true);
   }
 
   /**
@@ -93,14 +91,15 @@ public class HighPermUserGUI extends BasicGUI{
   }// </editor-fold>//GEN-END:initComponents
   //This button adds a student user
     private void promoteUserButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_promoteUserButtonActionPerformed
-      ArrayList<BasicUser> users = this.LoggedInUser.connection.getPotentialUsers();
-      new ViewUsersGUI(users, this.LoggedInUser.connection);
+      ArrayList<BasicUser> users = Database.getPotentialUsers();
+      //Keep user display up
+      new ViewUsersGUI(users).setVisible(true);
     }//GEN-LAST:event_promoteUserButtonActionPerformed
 
  //This button adds a new announcement to the announcement table
     private void postAnnouncementsButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_postAnnouncementsButtonActionPerformed
-      AddAnouncementGUI announce = new AddAnouncementGUI(LoggedInUser);
-      this.dispose();
+      new AddAnouncementGUI(LoggedInUser).setVisible(true);
+      //Keep user display up
     }//GEN-LAST:event_postAnnouncementsButtonActionPerformed
   //This views the schedule when clicked
     private void viewScheduleButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewScheduleButtonActionPerformed

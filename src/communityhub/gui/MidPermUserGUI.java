@@ -17,8 +17,6 @@ public class MidPermUserGUI extends BasicGUI{
     super(user);
     //gets announcement data and fills the table by using a for loop
     initComponents();
-
-    setVisible(true);
   }
 
   /**
@@ -109,16 +107,14 @@ public class MidPermUserGUI extends BasicGUI{
  //This button opens a page to add a new announcement
     private void postAnnouncementButtonActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_postAnnouncementButtonActionPerformed
     {//GEN-HEADEREND:event_postAnnouncementButtonActionPerformed
-      AddAnouncementGUI announce = new AddAnouncementGUI(LoggedInUser);
-      this.dispose();
+      new AddAnouncementGUI(LoggedInUser).setVisible(true);
+      //Keep user view open
     }//GEN-LAST:event_postAnnouncementButtonActionPerformed
   //This button views the forum with student queries
     private void viewStudentQueriesButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewStudentQueriesButtonActionPerformed
-      ArrayList<Post> forumPosts = this.LoggedInUser.connection.getRecentPosts(LoggedInUser);
+      ArrayList<Post> forumPosts = Database.getRecentPosts(LoggedInUser);
 
-      ForumGUI table = new ForumGUI(forumPosts, LoggedInUser);
-
-      table.setVisible(true);
+      new ForumGUI(forumPosts, LoggedInUser).setVisible(true);
     }//GEN-LAST:event_viewStudentQueriesButtonActionPerformed
   //This button opens a page to view uploaded documents
     private void viewDocumentsButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewDocumentsButtonActionPerformed

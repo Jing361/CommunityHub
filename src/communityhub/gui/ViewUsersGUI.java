@@ -7,11 +7,9 @@ import javax.swing.table.AbstractTableModel;
 
 public class ViewUsersGUI extends javax.swing.JFrame{
   ArrayList<BasicUser> data;
-  Database db = null;
 
-  public ViewUsersGUI(ArrayList<BasicUser> userList, Database db){
+  public ViewUsersGUI(ArrayList<BasicUser> userList){
     this.data = userList;
-    this.db = db;
     initComponents();
     //this views the users and their roles and displays them in a table
     docTable.getColumnModel().getColumn(0).setHeaderValue("User");
@@ -24,7 +22,6 @@ public class ViewUsersGUI extends javax.swing.JFrame{
       docTable.setValueAt(temp.username, i, 0);
       docTable.setValueAt(temp.toString(), i, 1);
     }
-    setVisible(true);
   }
 
   /**
@@ -148,9 +145,8 @@ public class ViewUsersGUI extends javax.swing.JFrame{
     private void promoteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_promoteButtonActionPerformed
       if(docTable.getSelectedRow() >= 0){
         //Second param should not be null
-        this.db.changeRole(data.get(docTable.getSelectedRow()).username, null);
-        this.setVisible(false);
-        new ViewUsersGUI(this.db.getPotentialUsers(), this.db);
+        Database.changeRole(data.get(docTable.getSelectedRow()).username, null);
+        new ViewUsersGUI(Database.getPotentialUsers()).setVisible(true);
         this.dispose();
       }
     }//GEN-LAST:event_promoteButtonActionPerformed
@@ -162,9 +158,8 @@ public class ViewUsersGUI extends javax.swing.JFrame{
     private void demoteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_demoteButtonActionPerformed
       if(docTable.getSelectedRow() >= 0){
         //Second param should not be null
-        this.db.changeRole(data.get(docTable.getSelectedRow()).username, null);
-        this.setVisible(false);
-        new ViewUsersGUI(this.db.getPotentialUsers(), this.db);
+        Database.changeRole(data.get(docTable.getSelectedRow()).username, null);
+        new ViewUsersGUI(Database.getPotentialUsers()).setVisible(true);
         this.dispose();
       }
     }//GEN-LAST:event_demoteButtonActionPerformed

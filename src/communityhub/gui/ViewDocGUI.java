@@ -25,7 +25,6 @@ public class ViewDocGUI extends javax.swing.JFrame{
       docTable.setValueAt(temp.filename, i, 0);
       docTable.setValueAt(Boolean.toString(temp.read), i, 1);
     }
-    setVisible(true);
   }
 
   private ViewDocGUI(){

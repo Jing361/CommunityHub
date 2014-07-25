@@ -11,11 +11,12 @@ public class EditPostGUI extends javax.swing.JFrame{
   Post replyTo = null;
 
   public EditPostGUI(){
+    initComponents();
   }
 
   public EditPostGUI(Post replyTo, BasicUser user){
     initComponents();
-    System.out.println(replyTo.postId);
+    this.replyTo = replyTo;
     this.user = user;
   }
   
@@ -109,8 +110,8 @@ public class EditPostGUI extends javax.swing.JFrame{
       String title = titleText.getText();
       String body = bodyText.getText();
 
-      this.user.connection.editPost(this.replyTo.postId, new Post(user.username, title, body));
-      new ForumGUI(this.user.connection.getRecentPosts(user), user);
+      Database.editPost(this.replyTo.postId, new Post(user.username, title, body));
+      new ForumGUI(Database.getRecentPosts(user), user).setVisible(true);
       this.dispose();
     }//GEN-LAST:event_submitActionPerformed
 

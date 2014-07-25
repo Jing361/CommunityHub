@@ -1,6 +1,7 @@
 package communityhub.gui;
 
 import communityhub.Announcement;
+import communityhub.DB.Database;
 import communityhub.users.BasicUser;
 import java.util.ArrayList;
 import java.util.logging.Level;
@@ -125,20 +126,19 @@ public class BasicGUI extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
   private void exitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitButtonActionPerformed
-    this.formWindowClosed(null);
-  }//GEN-LAST:event_exitButtonActionPerformed
-
-  private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
     try {
-      new LoginGUI(new javax.swing.JFrame(), true);
-      this.dispose();
+      new LoginGUI(new javax.swing.JFrame(), true).setVisible(true);
     } catch(Exception ex) {
       Logger.getLogger(HighPermUserGUI.class.getName()).log(Level.SEVERE, null, ex);
     }
+    this.dispose();
+  }//GEN-LAST:event_exitButtonActionPerformed
+
+  private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
   }//GEN-LAST:event_formWindowClosed
 
   public void updateAnnouncementTable(){
-    this.announcementData = this.LoggedInUser.connection.getRecentAnnouncements();
+    this.announcementData = Database.getRecentAnnouncements();
     if(this.announcementData == null){
       this.announcementData = new ArrayList<Announcement>();
     }

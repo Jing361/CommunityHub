@@ -4,8 +4,8 @@ import communityhub.DB.Database;
 import communityhub.gui.LowPermUserGUI;
 
 public class LowPermUser extends BasicUser{
-  public LowPermUser(String username, char[] password, Database conn){
-    super(username, password, conn);
+  public LowPermUser(String username, char[] password){
+    super(username, password);
   }
 
   @Override

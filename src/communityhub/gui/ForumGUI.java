@@ -14,11 +14,11 @@ public class ForumGUI extends javax.swing.JFrame{
     initComponents();
   }
 
-  public ForumGUI(ArrayList<Post> post, BasicUser Jim){
+  public ForumGUI(ArrayList<Post> post, BasicUser user){
     // mainly fills out the JTable
     data = new Post[post.size()];
     initComponents();
-    user = Jim;
+    this.user = user;
 
     forumTable.getColumnModel().getColumn(0).setHeaderValue("Author");
     forumTable.getColumnModel().getColumn(1).setHeaderValue("Title");
@@ -32,8 +32,6 @@ public class ForumGUI extends javax.swing.JFrame{
       forumTable.setValueAt(data[i].title, i, 1);
       forumTable.setValueAt(data[i].body, i, 2);
     }
-
-    setVisible(true);
   }
 
   /**
@@ -193,7 +191,6 @@ public class ForumGUI extends javax.swing.JFrame{
     }// </editor-fold>//GEN-END:initComponents
 
     private void CancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CancelButtonActionPerformed
-
       this.dispose();
     }//GEN-LAST:event_CancelButtonActionPerformed
 
@@ -202,21 +199,20 @@ public class ForumGUI extends javax.swing.JFrame{
       if(forumTable.getSelectedRow() >= 0){
         // bring up a reply to that window
         Post info = data[forumTable.getSelectedRow()];
-        AddPostGUI replyGUI = new AddPostGUI(info, user);
-        replyGUI.setVisible(true);
+        new AddPostGUI(info, user).setVisible(true);
       }
     }//GEN-LAST:event_replyButtonActionPerformed
 
   // refreshes forum post info
   private void updatePostData(){
-    this.user.connection.getRecentPosts(user).toArray(data);
+    Database.getRecentPosts(user).toArray(data);
   }
 
     private void ViewThreadButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ViewThreadButtonActionPerformed
       // if a selection was made, bring up it's thread
       if(forumTable.getSelectedRow() >= 0){
         Post temp = data[forumTable.getSelectedRow()];
-        new ViewThreadGUI(temp, user);
+        new ViewThreadGUI(temp, user).setVisible(true);
       }
     }//GEN-LAST:event_ViewThreadButtonActionPerformed
 
@@ -225,7 +221,7 @@ public class ForumGUI extends javax.swing.JFrame{
       if(forumTable.getSelectedRow() >= 0){
         Post temp = data[forumTable.getSelectedRow()];
         if(user.username.equals(temp.author)){
-          this.user.connection.deletePost(temp.postId);
+          Database.deletePost(temp.postId);
         } else {
           System.out.println("This was not your post");
         }
@@ -237,8 +233,7 @@ public class ForumGUI extends javax.swing.JFrame{
       if(forumTable.getSelectedRow() >= 0){
         Post temp = data[forumTable.getSelectedRow()];
         if(user.username.equals(temp.author)){
-          EditPostGUI eP = new EditPostGUI(temp, user);
-          eP.setVisible(true);
+          new EditPostGUI(temp, user).setVisible(true);
         } else {
           System.out.println("This was not your post");
         }

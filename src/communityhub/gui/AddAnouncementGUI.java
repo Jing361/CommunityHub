@@ -8,14 +8,9 @@ public class AddAnouncementGUI extends javax.swing.JFrame{
   // user that will be posting the announcement
   BasicUser user;
 
-  public AddAnouncementGUI(){
+  public AddAnouncementGUI(BasicUser user){
     initComponents();
-  }
-
-  public AddAnouncementGUI(BasicUser jim){
-    initComponents();
-    user = jim;
-    setVisible(true);
+    this.user = user;
   }
 
   /**
@@ -105,15 +100,13 @@ public class AddAnouncementGUI extends javax.swing.JFrame{
       String title = titleText.getText();
       String body = bodyText.getText();
       
-      user.connection.createAnnouncement(new Announcement(user.username, title, body));
+      Database.createAnnouncement(new Announcement(user.username, title, body));
 
-      user.SpawnGui();
       this.dispose();
     }//GEN-LAST:event_submitActionPerformed
 
   // open approriate gui after clicking cancel
     private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelButtonActionPerformed
-      user.SpawnGui();
       this.dispose();
     }//GEN-LAST:event_cancelButtonActionPerformed
 

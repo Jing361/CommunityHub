@@ -31,7 +31,6 @@ public class ViewThreadGUI extends javax.swing.JFrame{
       replyTabbedPane.addTab(replyPost.author + ": " + replyPost.title, null, temp, "Show Reply #" + (i + 1));
     }
     replyTabbedPane.setSelectedIndex(0);//initial
-    setVisible(true);
   }
 
   private ViewThreadGUI(){
@@ -134,8 +133,7 @@ public class ViewThreadGUI extends javax.swing.JFrame{
 
     private void replyButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_replyButtonActionPerformed
       //creates prompt to create a reply to the currently viewed parent query
-      AddPostGUI replyGUI = new AddPostGUI(parent, user);//creates a new postGUI to create a new post that will be replying to the parent
-      replyGUI.setVisible(true);
+      new AddPostGUI(parent, user).setVisible(true);//creates a new postGUI to create a new post that will be replying to the parent
     }//GEN-LAST:event_replyButtonActionPerformed
 
   protected JComponent makeTextPanel(String text){

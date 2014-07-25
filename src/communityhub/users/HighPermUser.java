@@ -6,16 +6,16 @@ import communityhub.gui.HighPermUserGUI;
 import java.util.UUID;
 
 public class HighPermUser extends BasicUser{
-  public HighPermUser(String username, char[] password, Database conn){
-    super(username, password, conn);
+  public HighPermUser(String username, char[] password){
+    super(username, password);
   }
 
   public String newAnnouncement(String title, String body){
-    return this.connection.createAnnouncement(new Announcement(this.username, title, body));
+    return Database.createAnnouncement(new Announcement(this.username, title, body));
   }
 
   public boolean editAnnouncement(Announcement oldAnn, Announcement newAnn){
-    return this.connection.editAnnouncement(oldAnn.postId, newAnn);
+    return Database.editAnnouncement(oldAnn.postId, newAnn);
   }
 
   @Override
