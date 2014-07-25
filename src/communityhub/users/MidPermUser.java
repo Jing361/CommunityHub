@@ -14,6 +14,6 @@ public class MidPermUser extends BasicUser{
   }
   
   public String toString(){
-    return "Moderator";
+    return "moderator";
   }
 }

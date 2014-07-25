@@ -3,7 +3,6 @@ package communityhub.users;
 import communityhub.Announcement;
 import communityhub.DB.Database;
 import communityhub.gui.HighPermUserGUI;
-import java.util.UUID;
 
 public class HighPermUser extends BasicUser{
   public HighPermUser(String username, char[] password){
@@ -25,6 +24,6 @@ public class HighPermUser extends BasicUser{
 
   @Override
   public String toString(){
-    return "Admin";
+    return "admin";
   }
 }
