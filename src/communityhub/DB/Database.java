@@ -53,11 +53,36 @@ public class Database{
 
   // given an announcement object, it creates it in the db
   public static String createAnnouncement(Announcement ann){
+    try {
+      Connection conn = DriverManager.getConnection("jdbc:mysql://174.102.54.43/communityhub", "commhubuser", "foobar");
+      
+      String query = "INSERT INTO post(author,title,body,UUID,type) VALUES(" + ann.author + "," + ann.title + "," + ann.body + "," + ann.postId + "'announcement');";
+      Statement stmt = conn.createStatement();
+      stmt.executeQuery(query);
+      
+      conn.close();
+    } catch(SQLException ex) {
+      Logger.getLogger(Database.class.getName()).log(Level.SEVERE, null, ex);
+    }
     return null;
   }
 
   public static boolean editAnnouncement(String oldID, Announcement newAnn){
-    return false;
+    boolean ret = true;
+    try {
+      Connection conn = DriverManager.getConnection("jdbc:mysql://174.102.54.43/communityhub", "commhubuser", "foobar");
+      
+      String query = "UPDATE post SET body=" + newAnn.body + "WHERE UUID='" + oldID + "';";
+      Statement stmt = conn.createStatement();
+      stmt.executeQuery(query);
+      
+      conn.close();
+    } catch(SQLException ex) {
+      Logger.getLogger(Database.class.getName()).log(Level.SEVERE, null, ex);
+      //Assume failure
+      ret = false;
+    }
+    return ret;
   }
 
   public static ArrayList<Announcement> getRecentAnnouncements(){
@@ -65,19 +90,74 @@ public class Database{
   }
 
   public static Announcement getAnnouncement(String annID){
-    return null;
+    Announcement ret = null;
+    try {
+      Connection conn = DriverManager.getConnection("jdbc:mysql://174.102.54.43/communityhub", "commhubuser", "foobar");
+      
+      ResultSet rs = null;
+      String query = "SELECT author,title,body,UUID FROM post WHERE UUID=" + annID + ";";
+      Statement stmt = conn.createStatement();
+      rs = stmt.executeQuery(query);
+      
+      while(rs.next()){
+        ret = new Announcement(rs.getString("author"), rs.getString("title"), rs.getString("body"), rs.getString("UUID"));
+      }
+      
+      conn.close();
+    } catch(SQLException ex) {
+      Logger.getLogger(Database.class.getName()).log(Level.SEVERE, null, ex);
+    }
+    
+    return ret;
   }
 
   public static boolean deleteAnnouncement(String annID){
-    return false;
+    try {
+      Connection conn = DriverManager.getConnection("jdbc:mysql://174.102.54.43/communityhub", "commhubuser", "foobar");
+      
+      String query = "DELETE FROM post where UUID=" + annID + ";";
+      Statement stmt = conn.createStatement();
+      stmt.executeQuery(query);
+      
+      conn.close();
+    } catch(SQLException ex) {
+      Logger.getLogger(Database.class.getName()).log(Level.SEVERE, null, ex);
+    }
+    
+    return true;
   }
 
   public static String CreatePost(Post p){
+    try {
+      Connection conn = DriverManager.getConnection("jdbc:mysql://174.102.54.43/communityhub", "commhubuser", "foobar");
+      
+      String query = "INSERT INTO post(author,title,body,UUID,type) VALUES(" + p.author + "," + p.title + "," + p.body + "," + p.postId + "'post');";
+      Statement stmt = conn.createStatement();
+      stmt.executeQuery(query);
+      
+      conn.close();
+    } catch(SQLException ex) {
+      Logger.getLogger(Database.class.getName()).log(Level.SEVERE, null, ex);
+    }
     return null;
   }
 
   public static boolean editPost(String oldID, Post p){
-    return false;
+    boolean ret = true;
+    try {
+      Connection conn = DriverManager.getConnection("jdbc:mysql://174.102.54.43/communityhub", "commhubuser", "foobar");
+      
+      String query = "UPDATE post SET body=" + p.body + "WHERE UUID='" + oldID + "';";
+      Statement stmt = conn.createStatement();
+      stmt.executeQuery(query);
+      
+      conn.close();
+    } catch(SQLException ex) {
+      Logger.getLogger(Database.class.getName()).log(Level.SEVERE, null, ex);
+      //Assume failure
+      ret = false;
+    }
+    return ret;
   }
 
   public static ArrayList<Post> getRecentPosts(BasicUser jim){
@@ -85,15 +165,58 @@ public class Database{
   }
 
   public static Post getPost(String postID){
-    return null;
+    Post ret = null;
+    try {
+      Connection conn = DriverManager.getConnection("jdbc:mysql://174.102.54.43/communityhub", "commhubuser", "foobar");
+      
+      ResultSet rs = null;
+      String query = "SELECT author,title,body,UUID FROM post WHERE UUID=" + postID + ";";
+      Statement stmt = conn.createStatement();
+      rs = stmt.executeQuery(query);
+      
+      while(rs.next()){
+        ret = new Announcement(rs.getString("author"), rs.getString("title"), rs.getString("body"), rs.getString("UUID"));
+      }
+      
+      conn.close();
+    } catch(SQLException ex) {
+      Logger.getLogger(Database.class.getName()).log(Level.SEVERE, null, ex);
+    }
+    
+    return ret;
   }
 
   public static boolean deletePost(String postID){
-    return false;
+    try {
+      Connection conn = DriverManager.getConnection("jdbc:mysql://174.102.54.43/communityhub", "commhubuser", "foobar");
+      
+      String query = "DELETE FROM post where UUID=" + postID + ";";
+      Statement stmt = conn.createStatement();
+      stmt.executeQuery(query);
+      
+      conn.close();
+    } catch(SQLException ex) {
+      Logger.getLogger(Database.class.getName()).log(Level.SEVERE, null, ex);
+    }    
+    return true;
   }
 
   public static boolean changeRole(String username, BasicUser New){
-    return false;
+    boolean ret = true;
+    try {
+      Connection conn = DriverManager.getConnection("jdbc:mysql://174.102.54.43/communityhub", "commhubuser", "foobar");
+      
+      String query = "UPDATE user SET role=" + New.toString() + "WHERE username='" + username + "';";
+      Statement stmt = conn.createStatement();
+      stmt.executeQuery(query);
+      
+      conn.close();
+    } catch(SQLException ex) {
+      Logger.getLogger(Database.class.getName()).log(Level.SEVERE, null, ex);
+      //Assume failure
+      ret = false;
+    }
+    return ret;
   }
 
   public static ArrayList<BasicUser> getPotentialUsers(){
