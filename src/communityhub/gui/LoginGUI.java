@@ -7,6 +7,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class LoginGUI extends javax.swing.JDialog{
+  //Login only spawns BasicGUI subclasses
+  //BasicGUI and program start spawn LoginGUI only
   public LoginGUI(java.awt.Frame parent, boolean modal) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException{
     super(parent, modal);
     initComponents();

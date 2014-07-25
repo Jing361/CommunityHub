@@ -9,6 +9,8 @@ import java.util.logging.Logger;
 import javax.swing.table.AbstractTableModel;
 
 public class BasicGUI extends javax.swing.JFrame {
+  //BasicGUI subclass is always open unless logging in
+  //Refresh button necessary to update information shown
   public BasicUser LoggedInUser = null;
   ArrayList<Announcement> announcementData = null;
   
