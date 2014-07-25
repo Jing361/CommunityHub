@@ -31,6 +31,7 @@ public class HighPermUserGUI extends BasicGUI{
     viewScheduleButton = new javax.swing.JButton();
 
     setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+    setPreferredSize(new java.awt.Dimension(670, 444));
 
     graduateCoordinatorTitle.setFont(new java.awt.Font("Lucida Grande", 0, 18)); // NOI18N
     graduateCoordinatorTitle.setText("Admin Page");

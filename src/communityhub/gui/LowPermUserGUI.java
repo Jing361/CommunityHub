@@ -39,6 +39,7 @@ public class LowPermUserGUI extends BasicGUI{
     viewUploadedDocumentsButton = new javax.swing.JButton();
 
     setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+    setPreferredSize(new java.awt.Dimension(670, 444));
 
     studentPostRole.setMaximumRowCount(2);
     studentPostRole.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Submit to Graduate Office", "Submit to All" }));
@@ -105,7 +106,7 @@ public class LowPermUserGUI extends BasicGUI{
               .addComponent(uploadFormsButton)
               .addGap(18, 18, 18)
               .addComponent(viewForumButton))))
-        .addContainerGap(19, Short.MAX_VALUE))
+        .addContainerGap(181, Short.MAX_VALUE))
     );
     layout.setVerticalGroup(
       layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -122,7 +123,7 @@ public class LowPermUserGUI extends BasicGUI{
         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
           .addComponent(announcementsLabel)
           .addComponent(viewUploadedDocumentsButton))
-        .addContainerGap(333, Short.MAX_VALUE))
+        .addContainerGap(355, Short.MAX_VALUE))
     );
 
     pack();

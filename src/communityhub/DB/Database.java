@@ -19,7 +19,7 @@ import java.util.logging.Logger;
 //Some parameters will be changed based on database implementation.
 public class Database{
   public static BasicUser lookUp(String username, char[] password){
-    String query = "SELECT password,role FROM user WHERE username = '" + username + "';";
+    String query = "SELECT password,role FROM user WHERE username='" + username + "';";
     Statement stmt = null;
     ResultSet rs = null;
     BasicUser ret = null;
@@ -76,7 +76,7 @@ public class Database{
     try {
       Connection conn = DriverManager.getConnection("jdbc:mysql://174.102.54.43/communityhub", "commhubuser", "foobar");
       
-      String query = "UPDATE post SET body=" + newAnn.body + "WHERE UUID='" + oldID + "';";
+      String query = "UPDATE post SET body='" + newAnn.body + "' WHERE UUID='" + oldID + "';";
       Statement stmt = conn.createStatement();
       stmt.executeUpdate(query);
       
@@ -100,18 +100,18 @@ public class Database{
       String query = "SELECT author,title,body,UUID FROM post WHERE type='announcement';";
       Statement stmt = conn.createStatement();
       rs = stmt.executeQuery(query);
-      
+
       while(rs.next()){
         ret.add(new Announcement(rs.getString("author"), rs.getString("title"), rs.getString("body"), rs.getString("UUID")));
       }
-      
+
       conn.close();
     } catch(SQLException ex) {
       System.out.print("ERROR:");
       System.out.println(ex.getMessage());
       Logger.getLogger(Database.class.getName()).log(Level.SEVERE, null, ex);
     }
-    
+
     return ret;
   }
 
@@ -121,7 +121,7 @@ public class Database{
       Connection conn = DriverManager.getConnection("jdbc:mysql://174.102.54.43/communityhub", "commhubuser", "foobar");
       
       ResultSet rs = null;
-      String query = "SELECT author,title,body,UUID FROM post WHERE UUID=" + annID + ";";
+      String query = "SELECT author,title,body,UUID FROM post WHERE UUID='" + annID + "';";
       Statement stmt = conn.createStatement();
       rs = stmt.executeQuery(query);
       
@@ -143,7 +143,7 @@ public class Database{
     try {
       Connection conn = DriverManager.getConnection("jdbc:mysql://174.102.54.43/communityhub", "commhubuser", "foobar");
       
-      String query = "DELETE FROM post WHERE UUID=" + annID + ";";
+      String query = "DELETE FROM post WHERE UUID='" + annID + "';";
       Statement stmt = conn.createStatement();
       stmt.executeUpdate(query);
       
@@ -161,7 +161,7 @@ public class Database{
     try {
       Connection conn = DriverManager.getConnection("jdbc:mysql://174.102.54.43/communityhub", "commhubuser", "foobar");
       
-      String query = "INSERT INTO post(author,title,body,UUID,type) VALUES(" + p.author + "," + p.title + "," + p.body + "," + p.postId + "'post');";
+      String query = "INSERT INTO post(author,title,body,UUID,type) VALUES('" + p.author + "','" + p.title + "','" + p.body + "','" + p.postId + "'post');";
       Statement stmt = conn.createStatement();
       stmt.executeUpdate(query);
       
@@ -179,7 +179,7 @@ public class Database{
     try {
       Connection conn = DriverManager.getConnection("jdbc:mysql://174.102.54.43/communityhub", "commhubuser", "foobar");
       
-      String query = "UPDATE post SET body=" + p.body + "WHERE UUID='" + oldID + "';";
+      String query = "UPDATE post SET body='" + p.body + "'WHERE UUID='" + oldID + "';";
       Statement stmt = conn.createStatement();
       stmt.executeUpdate(query);
       
@@ -204,7 +204,7 @@ public class Database{
       Connection conn = DriverManager.getConnection("jdbc:mysql://174.102.54.43/communityhub", "commhubuser", "foobar");
       
       ResultSet rs = null;
-      String query = "SELECT author,title,body,UUID FROM post WHERE UUID=" + postID + ";";
+      String query = "SELECT author,title,body,UUID FROM post WHERE UUID='" + postID + "';";
       Statement stmt = conn.createStatement();
       rs = stmt.executeQuery(query);
       
@@ -226,7 +226,7 @@ public class Database{
     try {
       Connection conn = DriverManager.getConnection("jdbc:mysql://174.102.54.43/communityhub", "commhubuser", "foobar");
       
-      String query = "DELETE FROM post where UUID=" + postID + ";";
+      String query = "DELETE FROM post where UUID='" + postID + "';";
       Statement stmt = conn.createStatement();
       stmt.executeUpdate(query);
       
@@ -244,7 +244,7 @@ public class Database{
     try {
       Connection conn = DriverManager.getConnection("jdbc:mysql://174.102.54.43/communityhub", "commhubuser", "foobar");
       
-      String query = "UPDATE user SET role=" + New.toString() + "WHERE username='" + username + "';";
+      String query = "UPDATE user SET role='" + New.toString() + "' WHERE username='" + username + "';";
       Statement stmt = conn.createStatement();
       stmt.executeUpdate(query);
       

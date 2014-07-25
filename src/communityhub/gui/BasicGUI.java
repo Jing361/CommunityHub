@@ -12,12 +12,13 @@ public class BasicGUI extends javax.swing.JFrame {
   //BasicGUI subclass is always open unless logging in
   //Refresh button necessary to update information shown
   public BasicUser LoggedInUser = null;
-  ArrayList<Announcement> announcementData = null;
+  ArrayList<Announcement> announcementData = new ArrayList<Announcement>();
   
   public BasicGUI(BasicUser user){
     this.LoggedInUser = user;
-    this.updateAnnouncementTable();
     this.initComponents();
+    this.updateAnnouncementTable();
+
     announcementTable.getColumnModel().getColumn(0).setHeaderValue("Author");
     announcementTable.getColumnModel().getColumn(1).setHeaderValue("Title");
     announcementTable.getColumnModel().getColumn(2).setHeaderValue("Body");
@@ -107,17 +108,17 @@ public class BasicGUI extends javax.swing.JFrame {
         layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
         .addGroup(layout.createSequentialGroup()
           .addContainerGap()
-          .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 574, javax.swing.GroupLayout.PREFERRED_SIZE)
-          .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-          .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-          .addComponent(exitButton)
+          .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+              .addGap(0, 597, Short.MAX_VALUE)
+              .addComponent(exitButton))
+            .addComponent(jScrollPane1))
           .addContainerGap())
       );
       layout.setVerticalGroup(
         layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
         .addGroup(layout.createSequentialGroup()
-          .addContainerGap(101, Short.MAX_VALUE)
+          .addContainerGap(157, Short.MAX_VALUE)
           .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 235, javax.swing.GroupLayout.PREFERRED_SIZE)
           .addGap(18, 18, 18)
           .addComponent(exitButton)
@@ -141,9 +142,7 @@ public class BasicGUI extends javax.swing.JFrame {
 
   public void updateAnnouncementTable(){
     this.announcementData = Database.getRecentAnnouncements();
-    if(this.announcementData == null){
-      this.announcementData = new ArrayList<Announcement>();
-    }
+
     for(int i = 0; i < announcementData.size(); i++){
       this.announcementTable.setValueAt(announcementData.get(i).author, i, 0);
       this.announcementTable.setValueAt(announcementData.get(i).title, i, 1);
