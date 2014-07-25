@@ -13,10 +13,18 @@ public class Post{
   public ArrayList<Post> responses = null;
 
   public Post(String author, String title, String body){
-    this(author, title, body, null);
+    this(author, title, body, (ArrayList<Post>)null);
   }
   
   public Post(String author, String title, String body, ArrayList<Post> responseList){
+    this(author, title, body, UUID.randomUUID().toString(), responseList);
+  }
+
+  public Post(String author, String title, String body, String uuid){
+    this(author, title, body, uuid, null);
+  }
+  
+  public Post(String author, String title, String body, String uuid, ArrayList<Post> responseList){
     this.author = author;
     this.title = title;
     this.body = body;
