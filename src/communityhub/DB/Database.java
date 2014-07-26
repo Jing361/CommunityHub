@@ -1,6 +1,7 @@
 package communityhub.DB;
 
 import communityhub.Announcement;
+import communityhub.Group;
 import communityhub.Post;
 import communityhub.users.BasicUser;
 import communityhub.users.HighPermUser;
@@ -12,38 +13,45 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
-import java.util.UUID;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 //Some parameters will be changed based on database implementation.
+//Need to prevent intentional and accidental SQL injection, and those types of errors
 public class Database{
   public static BasicUser lookUp(String username, char[] password){
-    String query = "SELECT password,role FROM user WHERE username='" + username + "';";
-    Statement stmt = null;
-    ResultSet rs = null;
     BasicUser ret = null;
     try {
       Connection conn = DriverManager.getConnection("jdbc:mysql://174.102.54.43/communityhub", "commhubuser", "foobar");
+      String query = "SELECT password,role FROM user WHERE username='" + username + "';";
+      Statement stmt = conn.createStatement();
+      ResultSet rs = stmt.executeQuery(query);
+
+      String pswd = new String(password);
+      String role = rs.getString("role");
+      ArrayList<Group> legal = new ArrayList<>();
+      
+      query = "SELECT comm FROM commuser WHERE member='" + username + "';";
       stmt = conn.createStatement();
       rs = stmt.executeQuery(query);
-      String p = new String(password);
-
       while(rs.next()){
-        if(rs.getString("password").equals(p)){
-          switch(rs.getString("role")){
-          case "admin":
-            ret = new HighPermUser(username, password);
-          break;
-          case "moderator":
-            ret = new MidPermUser(username, password);
-          break;
-          case "user":
-            ret = new LowPermUser(username, password);
-          break;
-          }
+        legal.add(new Group(rs.getString("comm")));
+      }
+      
+      if(rs.getString("password").equals(pswd)){
+        switch(rs.getString("role")){
+        case "admin":
+          ret = new HighPermUser(username, password, legal);
+        break;
+        case "moderator":
+          ret = new MidPermUser(username, password, legal);
+        break;
+        case "user":
+          ret = new LowPermUser(username, password, legal);
+        break;
         }
       }
+      
       conn.close();
     } catch(Exception ex) {
       System.out.print("ERROR:");
@@ -58,7 +66,7 @@ public class Database{
     try {
       Connection conn = DriverManager.getConnection("jdbc:mysql://174.102.54.43/communityhub", "commhubuser", "foobar");
       
-      String query = "INSERT INTO post(author,title,body,UUID,type) VALUES('" + ann.author + "','" + ann.title + "','" + ann.body + "','" + ann.postId + "','announcement');";
+      String query = "INSERT INTO post(author,title,body,UUID,type,community) VALUES('" + ann.author + "','" + ann.title + "','" + ann.body + "','" + ann.postId + "','announcement','public');";
       Statement stmt = conn.createStatement();
       stmt.executeUpdate(query);
       
@@ -97,12 +105,38 @@ public class Database{
       Connection conn = DriverManager.getConnection("jdbc:mysql://174.102.54.43/communityhub", "commhubuser", "foobar");
       
       ResultSet rs = null;
-      String query = "SELECT author,title,body,UUID FROM post WHERE type='announcement';";
+      String query = "SELECT author,title,body,community,UUID FROM post WHERE type='announcement' and community='public';";
       Statement stmt = conn.createStatement();
       rs = stmt.executeQuery(query);
 
       while(rs.next()){
-        ret.add(new Announcement(rs.getString("author"), rs.getString("title"), rs.getString("body"), rs.getString("UUID")));
+        ret.add(new Announcement(rs.getString("author"), rs.getString("title"), rs.getString("body"), new Group(rs.getString("community")), rs.getString("UUID")));
+      }
+
+      conn.close();
+    } catch(SQLException ex) {
+      System.out.print("ERROR:");
+      System.out.println(ex.getMessage());
+      Logger.getLogger(Database.class.getName()).log(Level.SEVERE, null, ex);
+    }
+
+    return ret;
+  }
+  
+  public static ArrayList<Announcement> getRecentAnnouncements(BasicUser user){
+    ArrayList<Announcement> ret = new ArrayList<>();
+    try {
+      Connection conn = DriverManager.getConnection("jdbc:mysql://174.102.54.43/communityhub", "commhubuser", "foobar");
+      
+      ResultSet rs = null;
+      String query = "SELECT DISTINCT P.author,P.title,P.body,P.community,P.UUID "
+                   + "FROM post P, commuser CU "
+                   + "WHERE P.type='announcement AND P.community=CU.comm AND CU.member='" + user.username + "';";
+      Statement stmt = conn.createStatement();
+      rs = stmt.executeQuery(query);
+
+      while(rs.next()){
+        ret.add(new Announcement(rs.getString("author"), rs.getString("title"), rs.getString("body"), new Group(rs.getString("community")), rs.getString("UUID")));
       }
 
       conn.close();
@@ -121,12 +155,12 @@ public class Database{
       Connection conn = DriverManager.getConnection("jdbc:mysql://174.102.54.43/communityhub", "commhubuser", "foobar");
       
       ResultSet rs = null;
-      String query = "SELECT author,title,body,UUID FROM post WHERE UUID='" + annID + "';";
+      String query = "SELECT author,title,body,community,UUID FROM post WHERE UUID='" + annID + "';";
       Statement stmt = conn.createStatement();
       rs = stmt.executeQuery(query);
       
       while(rs.next()){
-        ret = new Announcement(rs.getString("author"), rs.getString("title"), rs.getString("body"), rs.getString("UUID"));
+        ret = new Announcement(rs.getString("author"), rs.getString("title"), rs.getString("body"), new Group(rs.getString("community")), rs.getString("UUID"));
       }
       
       conn.close();
@@ -161,7 +195,7 @@ public class Database{
     try {
       Connection conn = DriverManager.getConnection("jdbc:mysql://174.102.54.43/communityhub", "commhubuser", "foobar");
       
-      String query = "INSERT INTO post(author,title,body,UUID,type) VALUES('" + p.author + "','" + p.title + "','" + p.body + "','" + p.postId + "'post');";
+      String query = "INSERT INTO post(author,title,body,UUID,type) VALUES('" + p.author + "','" + p.title + "','" + p.body + "','" + p.postId + "','post');";
       Statement stmt = conn.createStatement();
       stmt.executeUpdate(query);
       
@@ -195,7 +229,27 @@ public class Database{
   }
 
   public static ArrayList<Post> getRecentPosts(BasicUser jim){
-    return null;
+    ArrayList<Post> ret = new ArrayList<>();
+    try {
+      Connection conn = DriverManager.getConnection("jdbc:mysql://174.102.54.43/communityhub", "commhubuser", "foobar");
+      
+      ResultSet rs = null;
+      String query = "SELECT author,title,body,community,UUID FROM post WHERE type='post';";
+      Statement stmt = conn.createStatement();
+      rs = stmt.executeQuery(query);
+
+      while(rs.next()){
+        ret.add(new Announcement(rs.getString("author"), rs.getString("title"), rs.getString("body"), new Group(rs.getString("community")), rs.getString("UUID")));
+      }
+
+      conn.close();
+    } catch(SQLException ex) {
+      System.out.print("ERROR:");
+      System.out.println(ex.getMessage());
+      Logger.getLogger(Database.class.getName()).log(Level.SEVERE, null, ex);
+    }
+
+    return ret;
   }
 
   public static Post getPost(String postID){
@@ -204,12 +258,12 @@ public class Database{
       Connection conn = DriverManager.getConnection("jdbc:mysql://174.102.54.43/communityhub", "commhubuser", "foobar");
       
       ResultSet rs = null;
-      String query = "SELECT author,title,body,UUID FROM post WHERE UUID='" + postID + "';";
+      String query = "SELECT author,title,body,community,UUID FROM post WHERE UUID='" + postID + "';";
       Statement stmt = conn.createStatement();
       rs = stmt.executeQuery(query);
       
       while(rs.next()){
-        ret = new Announcement(rs.getString("author"), rs.getString("title"), rs.getString("body"), rs.getString("UUID"));
+        ret = new Announcement(rs.getString("author"), rs.getString("title"), rs.getString("body"), new Group(rs.getString("community")), rs.getString("UUID"));
       }
       
       conn.close();

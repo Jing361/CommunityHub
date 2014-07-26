@@ -1,6 +1,7 @@
 package communityhub.gui;
 
 import communityhub.DB.Database;
+import communityhub.Group;
 import communityhub.Post;
 import communityhub.users.BasicUser;
 import java.util.ArrayList;
@@ -8,6 +9,7 @@ import java.util.ArrayList;
 public class AddPostGUI extends javax.swing.JFrame{
   // user that is posting the post
   BasicUser user;
+  Group postAs;
   Post replyTo = null;
 
   public AddPostGUI(BasicUser user){
@@ -113,7 +115,7 @@ public class AddPostGUI extends javax.swing.JFrame{
       }
       // else leave it as null
 
-      Database.CreatePost(new Post(user.username, title, body));
+      Database.CreatePost(new Post(user.username, title, body, this.postAs));
       new ForumGUI(Database.getRecentPosts(user), user).setVisible(true);
       this.dispose();
     }//GEN-LAST:event_submitActionPerformed

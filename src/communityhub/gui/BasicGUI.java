@@ -2,6 +2,7 @@ package communityhub.gui;
 
 import communityhub.Announcement;
 import communityhub.DB.Database;
+import communityhub.Group;
 import communityhub.users.BasicUser;
 import java.util.ArrayList;
 import java.util.logging.Level;

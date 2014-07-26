@@ -1,17 +1,22 @@
 package communityhub.users;
 
-import communityhub.gui.BasicGUI;
 import communityhub.DB.Database;
+import communityhub.Group;
 import communityhub.Post;
-import java.util.UUID;
+import communityhub.gui.BasicGUI;
+import java.util.ArrayList;
 
 public class BasicUser {
   public String username;
   private char[] password;
+  ArrayList<Group> legalGroups;
+  public Group activeGroup;
 
-  public BasicUser(String username, char[] password){
+  public BasicUser(String username, char[] password, ArrayList<Group> legal){
     this.username = username;
     this.password = password;
+    this.legalGroups = legal;
+    this.activeGroup = legal.get(0);
   }
   
   public BasicGUI SpawnGui(){
@@ -19,7 +24,7 @@ public class BasicUser {
   }
   
   public String newPost(String title, String body){
-    return Database.CreatePost(new Post(this.username, title, body));
+    return Database.CreatePost(new Post(this.username, title, body, activeGroup));
   }
   
   public boolean editPost(Post oldP, Post newP){

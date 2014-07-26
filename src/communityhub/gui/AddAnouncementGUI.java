@@ -2,15 +2,18 @@ package communityhub.gui;
 
 import communityhub.Announcement;
 import communityhub.DB.Database;
+import communityhub.Group;
 import communityhub.users.BasicUser;
 
 public class AddAnouncementGUI extends javax.swing.JFrame{
   // user that will be posting the announcement
   BasicUser user;
+  Group postAs;
 
   public AddAnouncementGUI(BasicUser user){
     initComponents();
     this.user = user;
+    this.postAs = user.activeGroup;
   }
 
   /**
@@ -100,7 +103,7 @@ public class AddAnouncementGUI extends javax.swing.JFrame{
       String title = titleText.getText();
       String body = bodyText.getText();
       
-      Database.createAnnouncement(new Announcement(user.username, title, body));
+      Database.createAnnouncement(new Announcement(user.username, title, body, this.postAs));
 
       this.dispose();
     }//GEN-LAST:event_submitActionPerformed

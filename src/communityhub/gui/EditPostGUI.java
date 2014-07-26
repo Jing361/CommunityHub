@@ -1,6 +1,7 @@
 package communityhub.gui;
 
 import communityhub.DB.Database;
+import communityhub.Group;
 import communityhub.Post;
 import communityhub.users.BasicUser;
 import java.util.ArrayList;
@@ -9,15 +10,13 @@ public class EditPostGUI extends javax.swing.JFrame{
   // user that is posting the post
   BasicUser user;
   Post replyTo = null;
-
-  public EditPostGUI(){
-    initComponents();
-  }
+  Group postAs;
 
   public EditPostGUI(Post replyTo, BasicUser user){
     initComponents();
     this.replyTo = replyTo;
     this.user = user;
+    this.postAs = this.user.activeGroup;
   }
   
   public EditPostGUI(Post replyTo, ArrayList<Post> replies, BasicUser user){
@@ -110,7 +109,7 @@ public class EditPostGUI extends javax.swing.JFrame{
       String title = titleText.getText();
       String body = bodyText.getText();
 
-      Database.editPost(this.replyTo.postId, new Post(user.username, title, body));
+      Database.editPost(this.replyTo.postId, new Post(user.username, title, body, this.postAs));
       new ForumGUI(Database.getRecentPosts(user), user).setVisible(true);
       this.dispose();
     }//GEN-LAST:event_submitActionPerformed
