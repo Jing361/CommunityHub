@@ -137,6 +137,7 @@ public class LoginGUI extends javax.swing.JDialog{
     usernameField.setText("");//Text Field for Username
     passwordField.setText("");//Text Field for Password
     failureLabel.setText("Fields reset!");
+    usernameField.grabFocus();
   }//GEN-LAST:event_resetButtonActionPerformed
 
   private void submitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_submitButtonActionPerformed
