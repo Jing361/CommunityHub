@@ -27,7 +27,9 @@ public class Database{
       Statement stmt = conn.createStatement();
       ResultSet rs = stmt.executeQuery(query);
 
-      String pswd = new String(password);
+      rs.next();
+      String testPswd = new String(password);
+      String dbPswd = rs.getString("password");
       String role = rs.getString("role");
       ArrayList<Group> legal = new ArrayList<>();
       
@@ -38,8 +40,8 @@ public class Database{
         legal.add(new Group(rs.getString("comm")));
       }
       
-      if(rs.getString("password").equals(pswd)){
-        switch(rs.getString("role")){
+      if(dbPswd.equals(testPswd)){
+        switch(role){
         case "admin":
           ret = new HighPermUser(username, password, legal);
         break;
@@ -56,6 +58,7 @@ public class Database{
     } catch(Exception ex) {
       System.out.print("ERROR:");
       System.out.println(ex.getMessage());
+      System.out.println("Tried to login with:" + username);
       Logger.getLogger(Database.class.getName()).log(Level.SEVERE, null, ex);
     }
     return ret;
@@ -99,8 +102,8 @@ public class Database{
     return ret;
   }
 
-  public static ArrayList<Announcement> getRecentAnnouncements(){
-    ArrayList<Announcement> ret = new ArrayList<Announcement>();
+  public static ArrayList<Announcement> getPublicAnnouncements(){
+    ArrayList<Announcement> ret = new ArrayList<>();
     try {
       Connection conn = DriverManager.getConnection("jdbc:mysql://174.102.54.43/communityhub", "commhubuser", "foobar");
       
@@ -130,8 +133,36 @@ public class Database{
       
       ResultSet rs = null;
       String query = "SELECT DISTINCT P.author,P.title,P.body,P.community,P.UUID "
+                   + "FROM post P,commuser CU WHERE "
+                   + "P.type='announcement' AND P.community=CU.comm AND CU.member='" + user.username + "';";
+
+      Statement stmt = conn.createStatement();
+      rs = stmt.executeQuery(query);
+
+      while(rs.next()){
+        ret.add(new Announcement(rs.getString("author"), rs.getString("title"), rs.getString("body"), new Group(rs.getString("community")), rs.getString("UUID")));
+      }
+
+      conn.close();
+    } catch(SQLException ex) {
+      System.out.print("ERROR:");
+      System.out.println(ex.getMessage());
+      System.out.println("Tried to get announcements for:" + user.username);
+      Logger.getLogger(Database.class.getName()).log(Level.SEVERE, null, ex);
+    }
+
+    return ret;
+  }
+    
+  public static ArrayList<Announcement> getRecentAnnouncements(Group group){
+    ArrayList<Announcement> ret = new ArrayList<>();
+    try {
+      Connection conn = DriverManager.getConnection("jdbc:mysql://174.102.54.43/communityhub", "commhubuser", "foobar");
+      
+      ResultSet rs = null;
+      String query = "SELECT DISTINCT P.author,P.title,P.body,P.community,P.UUID "
                    + "FROM post P, commuser CU "
-                   + "WHERE P.type='announcement AND P.community=CU.comm AND CU.member='" + user.username + "';";
+                   + "WHERE P.type='announcement' AND P.community='" + group.name + "';";
       Statement stmt = conn.createStatement();
       rs = stmt.executeQuery(query);
 
@@ -148,7 +179,7 @@ public class Database{
 
     return ret;
   }
-
+  
   public static Announcement getAnnouncement(String annID){
     Announcement ret = null;
     try {

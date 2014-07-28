@@ -9,7 +9,7 @@ import java.util.ArrayList;
 public class BasicUser {
   public String username;
   private char[] password;
-  ArrayList<Group> legalGroups;
+  public ArrayList<Group> legalGroups;
   public Group activeGroup;
 
   public BasicUser(String username, char[] password, ArrayList<Group> legal){

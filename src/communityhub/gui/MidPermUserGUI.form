@@ -27,19 +27,13 @@
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="postAnnouncementButton" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Component id="viewStudentQueriesButton" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Component id="submitScheduleButton" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Component id="viewDocumentsButton" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" pref="202" max="-2" attributes="0"/>
                       <Component id="graduateAssistantLoginTitle" min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
-              <EmptySpace pref="25" max="32767" attributes="0"/>
+              <EmptySpace pref="236" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -49,12 +43,7 @@
               <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
               <Component id="graduateAssistantLoginTitle" min="-2" max="-2" attributes="0"/>
               <EmptySpace type="separate" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="postAnnouncementButton" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="viewStudentQueriesButton" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="viewDocumentsButton" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="submitScheduleButton" alignment="3" min="-2" max="-2" attributes="0"/>
-              </Group>
+              <Component id="postAnnouncementButton" min="-2" max="-2" attributes="0"/>
               <EmptySpace pref="361" max="32767" attributes="0"/>
           </Group>
       </Group>
@@ -75,30 +64,6 @@
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="postAnnouncementButtonActionPerformed"/>
-      </Events>
-    </Component>
-    <Component class="javax.swing.JButton" name="viewStudentQueriesButton">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="View Queries"/>
-      </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="viewStudentQueriesButtonActionPerformed"/>
-      </Events>
-    </Component>
-    <Component class="javax.swing.JButton" name="viewDocumentsButton">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="View Uploaded Documents"/>
-      </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="viewDocumentsButtonActionPerformed"/>
-      </Events>
-    </Component>
-    <Component class="javax.swing.JButton" name="submitScheduleButton">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Submit Availability Schedule"/>
-      </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="submitScheduleButtonActionPerformed"/>
       </Events>
     </Component>
   </SubComponents>

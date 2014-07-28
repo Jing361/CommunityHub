@@ -150,8 +150,8 @@ public class LoginGUI extends javax.swing.JDialog{
     result = Database.lookUp(username, password);
 
     if(result != null){
-      this.dispose();
       result.SpawnGui().setVisible(true);
+      this.dispose();
     } else {
       failureLabel.setText("No user found!");
     }

@@ -30,9 +30,6 @@ public class MidPermUserGUI extends BasicGUI{
 
     graduateAssistantLoginTitle = new javax.swing.JLabel();
     postAnnouncementButton = new javax.swing.JButton();
-    viewStudentQueriesButton = new javax.swing.JButton();
-    viewDocumentsButton = new javax.swing.JButton();
-    submitScheduleButton = new javax.swing.JButton();
 
     setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -46,27 +43,6 @@ public class MidPermUserGUI extends BasicGUI{
       }
     });
 
-    viewStudentQueriesButton.setText("View Queries");
-    viewStudentQueriesButton.addActionListener(new java.awt.event.ActionListener() {
-      public void actionPerformed(java.awt.event.ActionEvent evt) {
-        viewStudentQueriesButtonActionPerformed(evt);
-      }
-    });
-
-    viewDocumentsButton.setText("View Uploaded Documents");
-    viewDocumentsButton.addActionListener(new java.awt.event.ActionListener() {
-      public void actionPerformed(java.awt.event.ActionEvent evt) {
-        viewDocumentsButtonActionPerformed(evt);
-      }
-    });
-
-    submitScheduleButton.setText("Submit Availability Schedule");
-    submitScheduleButton.addActionListener(new java.awt.event.ActionListener() {
-      public void actionPerformed(java.awt.event.ActionEvent evt) {
-        submitScheduleButtonActionPerformed(evt);
-      }
-    });
-
     org.jdesktop.layout.GroupLayout layout = new org.jdesktop.layout.GroupLayout(getContentPane());
     getContentPane().setLayout(layout);
     layout.setHorizontalGroup(
@@ -75,17 +51,11 @@ public class MidPermUserGUI extends BasicGUI{
         .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
           .add(layout.createSequentialGroup()
             .addContainerGap()
-            .add(postAnnouncementButton)
-            .add(18, 18, 18)
-            .add(viewStudentQueriesButton)
-            .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
-            .add(submitScheduleButton)
-            .add(18, 18, 18)
-            .add(viewDocumentsButton))
+            .add(postAnnouncementButton))
           .add(layout.createSequentialGroup()
             .add(202, 202, 202)
             .add(graduateAssistantLoginTitle)))
-        .addContainerGap(25, Short.MAX_VALUE))
+        .addContainerGap(236, Short.MAX_VALUE))
     );
     layout.setVerticalGroup(
       layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
@@ -93,11 +63,7 @@ public class MidPermUserGUI extends BasicGUI{
         .add(20, 20, 20)
         .add(graduateAssistantLoginTitle)
         .add(18, 18, 18)
-        .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
-          .add(postAnnouncementButton)
-          .add(viewStudentQueriesButton)
-          .add(viewDocumentsButton)
-          .add(submitScheduleButton))
+        .add(postAnnouncementButton)
         .addContainerGap(361, Short.MAX_VALUE))
     );
 
@@ -110,23 +76,9 @@ public class MidPermUserGUI extends BasicGUI{
       new AddAnouncementGUI(LoggedInUser).setVisible(true);
       //Keep user view open
     }//GEN-LAST:event_postAnnouncementButtonActionPerformed
-  //This button views the forum with student queries
-    private void viewStudentQueriesButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewStudentQueriesButtonActionPerformed
-      ArrayList<Post> forumPosts = Database.getRecentPosts(LoggedInUser);
 
-      new ForumGUI(forumPosts, LoggedInUser).setVisible(true);
-    }//GEN-LAST:event_viewStudentQueriesButtonActionPerformed
-  //This button opens a page to view uploaded documents
-    private void viewDocumentsButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewDocumentsButtonActionPerformed
-    }//GEN-LAST:event_viewDocumentsButtonActionPerformed
-  //This button opens a directory viewer to upload a pdf version of a schedule
-    private void submitScheduleButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_submitScheduleButtonActionPerformed
-    }//GEN-LAST:event_submitScheduleButtonActionPerformed
-  // Variables declaration - do not modify//GEN-BEGIN:variables
+  //This button opens a directory viewer to upload a pdf version of a schedule  // Variables declaration - do not modify//GEN-BEGIN:variables
   private javax.swing.JLabel graduateAssistantLoginTitle;
   private javax.swing.JButton postAnnouncementButton;
-  private javax.swing.JButton submitScheduleButton;
-  private javax.swing.JButton viewDocumentsButton;
-  private javax.swing.JButton viewStudentQueriesButton;
   // End of variables declaration//GEN-END:variables
 }

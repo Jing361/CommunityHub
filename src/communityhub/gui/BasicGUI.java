@@ -1,10 +1,13 @@
 package communityhub.gui;
 
 import communityhub.Announcement;
+import communityhub.AnnouncementTable;
 import communityhub.DB.Database;
 import communityhub.Group;
 import communityhub.users.BasicUser;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.table.AbstractTableModel;
@@ -13,16 +16,14 @@ public class BasicGUI extends javax.swing.JFrame {
   //BasicGUI subclass is always open unless logging in
   //Refresh button necessary to update information shown
   public BasicUser LoggedInUser = null;
-  ArrayList<Announcement> announcementData = new ArrayList<Announcement>();
+  HashMap<String, ArrayList<Announcement>> groupAnnouncement = null;
+  //ArrayList<ArrayList<Announcement>> groupAnnouncements = new ArrayList<>();
   
   public BasicGUI(BasicUser user){
     this.LoggedInUser = user;
+    this.groupAnnouncement = new HashMap<>();
     this.initComponents();
-    this.updateAnnouncementTable();
-
-    announcementTable.getColumnModel().getColumn(0).setHeaderValue("Author");
-    announcementTable.getColumnModel().getColumn(1).setHeaderValue("Title");
-    announcementTable.getColumnModel().getColumn(2).setHeaderValue("Body");
+    this.initAnnouncementTables();
   }
 
   /**
@@ -34,100 +35,75 @@ public class BasicGUI extends javax.swing.JFrame {
   // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
   private void initComponents() {
 
-    jScrollPane1 = new javax.swing.JScrollPane();
-    announcementTable = new javax.swing.JTable();
     exitButton = new javax.swing.JButton();
+    announcementsLabel = new javax.swing.JLabel();
+    refreshButton = new javax.swing.JButton();
+    communityTabs = new javax.swing.JTabbedPane();
+    welcomeLabel = new javax.swing.JLabel();
 
     setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-    addWindowListener(new java.awt.event.WindowAdapter() {
-      public void windowClosed(java.awt.event.WindowEvent evt) {
-        formWindowClosed(evt);
+
+    exitButton.setText("Exit");
+    exitButton.addActionListener(new java.awt.event.ActionListener() {
+      public void actionPerformed(java.awt.event.ActionEvent evt) {
+        exitButtonActionPerformed(evt);
       }
     });
 
-    announcementTable.setModel(new AbstractTableModel()
-      {
-        @Override
-        public int getRowCount()
-        {
-          return announcementData.size();
-        }
+    announcementsLabel.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+    announcementsLabel.setText("Announcements");
 
-        @Override
-        public int getColumnCount()
-        {
-          return 3;
-        }
+    refreshButton.setText("Refresh");
+    refreshButton.addActionListener(new java.awt.event.ActionListener() {
+      public void actionPerformed(java.awt.event.ActionEvent evt) {
+        refreshButtonActionPerformed(evt);
+      }
+    });
 
-        @Override
-        public String getValueAt(int i, int j)
-        {
-          String temp = null;
-          switch (j)
-          {
-            case 0:
-            temp = announcementData.get(i).author;
-            break;
-            case 1:
-            temp = announcementData.get(i).title;
-            break;
-            case 2:
-            temp = announcementData.get(i).body;
-            break;
-          }
-          return temp;
-        }
+    welcomeLabel.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+    welcomeLabel.setText("Welcome, user!");
 
-        public void setValueAt(String val, int i, int j)
-        {
-          switch (j)
-          {
-            case 1:
-            announcementData.get(i).author = val;
-            break;
-            case 2:
-            announcementData.get(i).title = val;
-            break;
-            case 3:
-            announcementData.get(i).body = val;
-            break;
-          }
-        }
-      });
-      jScrollPane1.setViewportView(announcementTable);
+    javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+    getContentPane().setLayout(layout);
+    layout.setHorizontalGroup(
+      layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+      .addGroup(layout.createSequentialGroup()
+        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+          .addGroup(layout.createSequentialGroup()
+            .addContainerGap(607, Short.MAX_VALUE)
+            .addComponent(exitButton))
+          .addGroup(layout.createSequentialGroup()
+            .addGap(285, 285, 285)
+            .addComponent(announcementsLabel)
+            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(refreshButton))
+          .addGroup(layout.createSequentialGroup()
+            .addContainerGap()
+            .addComponent(communityTabs)))
+        .addContainerGap())
+      .addGroup(layout.createSequentialGroup()
+        .addGap(250, 250, 250)
+        .addComponent(welcomeLabel)
+        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+    );
+    layout.setVerticalGroup(
+      layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+      .addGroup(layout.createSequentialGroup()
+        .addContainerGap()
+        .addComponent(welcomeLabel)
+        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 88, Short.MAX_VALUE)
+        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+          .addComponent(refreshButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+          .addComponent(announcementsLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+        .addComponent(communityTabs, javax.swing.GroupLayout.PREFERRED_SIZE, 247, javax.swing.GroupLayout.PREFERRED_SIZE)
+        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+        .addComponent(exitButton)
+        .addContainerGap())
+    );
 
-      exitButton.setText("Exit");
-      exitButton.addActionListener(new java.awt.event.ActionListener() {
-        public void actionPerformed(java.awt.event.ActionEvent evt) {
-          exitButtonActionPerformed(evt);
-        }
-      });
-
-      javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-      getContentPane().setLayout(layout);
-      layout.setHorizontalGroup(
-        layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-        .addGroup(layout.createSequentialGroup()
-          .addContainerGap()
-          .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-              .addGap(0, 597, Short.MAX_VALUE)
-              .addComponent(exitButton))
-            .addComponent(jScrollPane1))
-          .addContainerGap())
-      );
-      layout.setVerticalGroup(
-        layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-        .addGroup(layout.createSequentialGroup()
-          .addContainerGap(157, Short.MAX_VALUE)
-          .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 235, javax.swing.GroupLayout.PREFERRED_SIZE)
-          .addGap(18, 18, 18)
-          .addComponent(exitButton)
-          .addContainerGap())
-      );
-
-      pack();
-    }// </editor-fold>//GEN-END:initComponents
+    pack();
+  }// </editor-fold>//GEN-END:initComponents
 
   private void exitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitButtonActionPerformed
     try {
@@ -138,22 +114,55 @@ public class BasicGUI extends javax.swing.JFrame {
     this.dispose();
   }//GEN-LAST:event_exitButtonActionPerformed
 
-  private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
-  }//GEN-LAST:event_formWindowClosed
+  private void refreshButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_refreshButtonActionPerformed
+    this.updateAnnouncementTables();
+  }//GEN-LAST:event_refreshButtonActionPerformed
 
-  public void updateAnnouncementTable(){
-    this.announcementData = Database.getRecentAnnouncements();
+  public void initAnnouncementTables(){
+    ArrayList<Announcement> announcementData = Database.getRecentAnnouncements(this.LoggedInUser);
+    
+    //Ensure first tab is 'public'
+    {
+      ArrayList<Announcement> pubList = Database.getPublicAnnouncements();
+      this.groupAnnouncement.put("public", pubList);
+      this.communityTabs.addTab("public", new AnnouncementTable(pubList));
+    }
 
-    for(int i = 0; i < announcementData.size(); i++){
-      this.announcementTable.setValueAt(announcementData.get(i).author, i, 0);
-      this.announcementTable.setValueAt(announcementData.get(i).title, i, 1);
-      this.announcementTable.setValueAt(announcementData.get(i).body, i, 2);
+    Iterator iter = this.LoggedInUser.legalGroups.iterator();
+    while(iter.hasNext()){
+      Group curr = (Group)iter.next();
+      String nam = curr.name;
+      if(nam.equals("public")){
+        continue;
+      }
+      ArrayList<Announcement> temp = new ArrayList<>();
+
+      for(int j = 0; j < announcementData.size(); ++j){
+        if(nam.equals(announcementData.get(j).group.name)){
+          temp.add(announcementData.get(j));
+        }
+      }
+
+      this.groupAnnouncement.put(nam, temp);
+      this.communityTabs.addTab(nam, new AnnouncementTable(temp));
+    }
+  }
+  
+  public void updateAnnouncementTables(){
+    //this.communityTabs;
+    //this.groupAnnouncement;
+    
+    Iterator iter = this.groupAnnouncement.keySet().iterator();
+    while(iter.hasNext()){
+      String key = (String)iter.next();
     }
   }
 
   // Variables declaration - do not modify//GEN-BEGIN:variables
-  protected javax.swing.JTable announcementTable;
+  private javax.swing.JLabel announcementsLabel;
+  private javax.swing.JTabbedPane communityTabs;
   private javax.swing.JButton exitButton;
-  private javax.swing.JScrollPane jScrollPane1;
+  private javax.swing.JButton refreshButton;
+  private javax.swing.JLabel welcomeLabel;
   // End of variables declaration//GEN-END:variables
 }

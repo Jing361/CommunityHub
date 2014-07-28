@@ -30,134 +30,35 @@ public class LowPermUserGUI extends BasicGUI{
   // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
   private void initComponents() {
 
-    studentPostRole = new javax.swing.JComboBox();
-    submitQueryButton = new javax.swing.JButton();
     pageTitle = new javax.swing.JLabel();
-    uploadFormsButton = new javax.swing.JButton();
-    announcementsLabel = new javax.swing.JLabel();
-    viewForumButton = new javax.swing.JButton();
-    viewUploadedDocumentsButton = new javax.swing.JButton();
 
     setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
     setPreferredSize(new java.awt.Dimension(670, 444));
 
-    studentPostRole.setMaximumRowCount(2);
-    studentPostRole.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Submit to Graduate Office", "Submit to All" }));
-    studentPostRole.addActionListener(new java.awt.event.ActionListener() {
-      public void actionPerformed(java.awt.event.ActionEvent evt) {
-        studentPostRoleActionPerformed(evt);
-      }
-    });
-
-    submitQueryButton.setText("Submit Query");
-    submitQueryButton.addActionListener(new java.awt.event.ActionListener() {
-      public void actionPerformed(java.awt.event.ActionEvent evt) {
-        submitQueryButtonActionPerformed(evt);
-      }
-    });
-
     pageTitle.setFont(new java.awt.Font("Lucida Grande", 0, 18)); // NOI18N
     pageTitle.setText("Student Page");
-
-    uploadFormsButton.setText("Upload Forms");
-    uploadFormsButton.addActionListener(new java.awt.event.ActionListener() {
-      public void actionPerformed(java.awt.event.ActionEvent evt) {
-        uploadFormsButtonActionPerformed(evt);
-      }
-    });
-
-    announcementsLabel.setText("Announcements");
-
-    viewForumButton.setText("View Forum");
-    viewForumButton.addActionListener(new java.awt.event.ActionListener() {
-      public void actionPerformed(java.awt.event.ActionEvent evt) {
-        viewForumButtonActionPerformed(evt);
-      }
-    });
-
-    viewUploadedDocumentsButton.setText("View Uploaded Documents");
-    viewUploadedDocumentsButton.addActionListener(new java.awt.event.ActionListener() {
-      public void actionPerformed(java.awt.event.ActionEvent evt) {
-        viewUploadedDocumentsButtonActionPerformed(evt);
-      }
-    });
 
     javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
     getContentPane().setLayout(layout);
     layout.setHorizontalGroup(
       layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
       .addGroup(layout.createSequentialGroup()
-        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-          .addGroup(layout.createSequentialGroup()
-            .addGap(195, 195, 195)
-            .addComponent(pageTitle))
-          .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-            .addGroup(layout.createSequentialGroup()
-              .addGap(234, 234, 234)
-              .addComponent(announcementsLabel)
-              .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-              .addComponent(viewUploadedDocumentsButton))
-            .addGroup(layout.createSequentialGroup()
-              .addContainerGap()
-              .addComponent(studentPostRole, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-              .addGap(24, 24, 24)
-              .addComponent(submitQueryButton)
-              .addGap(18, 18, 18)
-              .addComponent(uploadFormsButton)
-              .addGap(18, 18, 18)
-              .addComponent(viewForumButton))))
-        .addContainerGap(181, Short.MAX_VALUE))
+        .addGap(266, 266, 266)
+        .addComponent(pageTitle)
+        .addContainerGap(314, Short.MAX_VALUE))
     );
     layout.setVerticalGroup(
       layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
       .addGroup(layout.createSequentialGroup()
         .addContainerGap()
         .addComponent(pageTitle)
-        .addGap(18, 18, 18)
-        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-          .addComponent(uploadFormsButton)
-          .addComponent(studentPostRole, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-          .addComponent(submitQueryButton)
-          .addComponent(viewForumButton))
-        .addGap(23, 23, 23)
-        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-          .addComponent(announcementsLabel)
-          .addComponent(viewUploadedDocumentsButton))
-        .addContainerGap(355, Short.MAX_VALUE))
+        .addContainerGap(442, Short.MAX_VALUE))
     );
 
     pack();
   }// </editor-fold>//GEN-END:initComponents
 
-    private void studentPostRoleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_studentPostRoleActionPerformed
-    }//GEN-LAST:event_studentPostRoleActionPerformed
-
-    private void submitQueryButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_submitQueryButtonActionPerformed
-      new AddPostGUI(this.LoggedInUser).setVisible(true);
-      //Keep user view open
-    }//GEN-LAST:event_submitQueryButtonActionPerformed
-  //This button press opens a directory viewer for students to upload forms
-  //where only PDF files are viewable, and saves the file directory to the database
-    private void uploadFormsButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_uploadFormsButtonActionPerformed
-    }//GEN-LAST:event_uploadFormsButtonActionPerformed
-  //This button press action opens the forum and 
-  //displays the database list of posts in a table view
-    private void viewForumButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewForumButtonActionPerformed
-      ArrayList<Post> forumPosts = Database.getRecentPosts(this.LoggedInUser);
-
-      new ForumGUI(forumPosts, this.LoggedInUser).setVisible(true);
-    }//GEN-LAST:event_viewForumButtonActionPerformed
-
- //This button press opens a new window to view documents that have been uploaded
-    private void viewUploadedDocumentsButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewUploadedDocumentsButtonActionPerformed
-    }//GEN-LAST:event_viewUploadedDocumentsButtonActionPerformed
   // Variables declaration - do not modify//GEN-BEGIN:variables
-  private javax.swing.JLabel announcementsLabel;
   private javax.swing.JLabel pageTitle;
-  private javax.swing.JComboBox studentPostRole;
-  private javax.swing.JButton submitQueryButton;
-  private javax.swing.JButton uploadFormsButton;
-  private javax.swing.JButton viewForumButton;
-  private javax.swing.JButton viewUploadedDocumentsButton;
   // End of variables declaration//GEN-END:variables
 }

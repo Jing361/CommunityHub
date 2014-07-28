@@ -1,14 +1,9 @@
 package communityhub.gui;
 
-import communityhub.Announcement;
 import communityhub.DB.Database;
 import communityhub.users.BasicUser;
 import communityhub.users.HighPermUser;
-import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.swing.table.AbstractTableModel;
 
 public class HighPermUserGUI extends BasicGUI{
   public HighPermUserGUI(HighPermUser user){
@@ -28,10 +23,8 @@ public class HighPermUserGUI extends BasicGUI{
     graduateCoordinatorTitle = new javax.swing.JLabel();
     promoteUserButton = new javax.swing.JButton();
     postAnnouncementsButton = new javax.swing.JButton();
-    viewScheduleButton = new javax.swing.JButton();
 
     setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-    setPreferredSize(new java.awt.Dimension(670, 444));
 
     graduateCoordinatorTitle.setFont(new java.awt.Font("Lucida Grande", 0, 18)); // NOI18N
     graduateCoordinatorTitle.setText("Admin Page");
@@ -50,13 +43,6 @@ public class HighPermUserGUI extends BasicGUI{
       }
     });
 
-    viewScheduleButton.setText("View Availability Schedule");
-    viewScheduleButton.addActionListener(new java.awt.event.ActionListener() {
-      public void actionPerformed(java.awt.event.ActionEvent evt) {
-        viewScheduleButtonActionPerformed(evt);
-      }
-    });
-
     org.jdesktop.layout.GroupLayout layout = new org.jdesktop.layout.GroupLayout(getContentPane());
     getContentPane().setLayout(layout);
     layout.setHorizontalGroup(
@@ -67,13 +53,11 @@ public class HighPermUserGUI extends BasicGUI{
             .add(61, 61, 61)
             .add(postAnnouncementsButton)
             .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
-            .add(promoteUserButton)
-            .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-            .add(viewScheduleButton))
+            .add(promoteUserButton))
           .add(layout.createSequentialGroup()
             .add(222, 222, 222)
             .add(graduateCoordinatorTitle)))
-        .addContainerGap(97, Short.MAX_VALUE))
+        .addContainerGap(260, Short.MAX_VALUE))
     );
     layout.setVerticalGroup(
       layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
@@ -83,8 +67,7 @@ public class HighPermUserGUI extends BasicGUI{
         .add(18, 18, 18)
         .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
           .add(postAnnouncementsButton)
-          .add(promoteUserButton)
-          .add(viewScheduleButton, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+          .add(promoteUserButton))
         .add(355, 355, 355))
     );
 
@@ -102,16 +85,13 @@ public class HighPermUserGUI extends BasicGUI{
       new AddAnouncementGUI(LoggedInUser).setVisible(true);
       //Keep user display up
     }//GEN-LAST:event_postAnnouncementsButtonActionPerformed
-  //This views the schedule when clicked
-    private void viewScheduleButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewScheduleButtonActionPerformed
-    }//GEN-LAST:event_viewScheduleButtonActionPerformed
-  //This creates the announcement table by looping through the database and adding new announcements
+
+ //This creates the announcement table by looping through the database and adding new announcements
   //to the announcement table retrieve from MongoDB
 
   // Variables declaration - do not modify//GEN-BEGIN:variables
   private javax.swing.JLabel graduateCoordinatorTitle;
   private javax.swing.JButton postAnnouncementsButton;
   private javax.swing.JButton promoteUserButton;
-  private javax.swing.JButton viewScheduleButton;
   // End of variables declaration//GEN-END:variables
 }
